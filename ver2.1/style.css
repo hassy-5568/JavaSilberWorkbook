@@ -1,0 +1,235 @@
+:root {
+    --primary-color: #4a6fa5;
+    --bg-color: #f4f6f9;
+    --border-color: #e1e4e8;
+    --text-color: #333333;
+    --accent-color: #28a745;
+    --code-bg: #272822; /* コードエリアのダーク背景 */
+    --code-color: #f8f8f2;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 25px;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+    color: #2c3e50;
+}
+
+.container {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+/* 左カラム：章リスト */
+.sidebar {
+    flex: 1;
+    min-width: 260px;
+    max-width: 320px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 20px;
+}
+
+/* 右カラム：問題一覧 */
+.main-content {
+    flex: 3;
+}
+
+h2 {
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+.list-group {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.list-item {
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 14px;
+}
+
+.list-item:hover {
+    background-color: #f8f9fa;
+    border-color: #cbd5e0;
+}
+
+.list-item.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+    font-weight: bold;
+}
+
+/* 問題カード */
+.question-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.question-header {
+    margin-bottom: 12px;
+}
+
+.chapter-tag {
+    font-size: 12px;
+    background-color: #e2e8f0;
+    color: #4a5568;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-weight: bold;
+}
+
+.question-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #1a202c;
+    margin-bottom: 10px;
+}
+
+.question-body {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    white-space: pre-line;
+}
+
+/* プログラムコード用スタイル */
+.code-block {
+    background-color: var(--code-bg);
+    color: var(--code-color);
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    padding: 14px;
+    border-radius: 6px;
+    font-size: 14px;
+    line-height: 1.5;
+    overflow-x: auto;
+    margin: 10px 0;
+    white-space: pre;
+}
+
+/* 選択肢全体のコンテナ */
+.options-container {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* 選択肢1行（A., B., ... とコンテンツの並び） */
+.option-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid var(--border-color);
+    padding: 10px 14px;
+    border-radius: 6px;
+}
+
+/* 選択肢の記号 (A., B., C.) */
+.option-label {
+    font-weight: bold;
+    font-size: 15px;
+    color: var(--primary-color);
+    min-width: 20px;
+    padding-top: 2px;
+}
+
+/* 選択肢の本文エリア */
+.option-content {
+    flex: 1;
+    overflow-x: auto; /* 横長コードのスクロール対応 */
+}
+
+/* 選択肢内のコードブロック（マージン調整） */
+.option-content .code-block {
+    margin: 4px 0 0 0;
+    font-size: 13.5px;
+}
+
+/* 旧テキスト形式選択肢の互換用スタイル */
+.options-text-legacy {
+    background-color: #f8f9fa;
+    border: 1px solid var(--border-color);
+    padding: 12px 15px;
+    border-radius: 6px;
+    font-size: 14px;
+    white-space: pre-line;
+    line-height: 1.6;
+}
+
+/* 解答・解説エリア */
+details {
+    margin-top: 15px;
+    border-top: 1px dashed var(--border-color);
+    padding-top: 15px;
+}
+
+summary {
+    cursor: pointer;
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: var(--accent-color);
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 4px;
+    user-select: none;
+    transition: background-color 0.2s;
+}
+
+summary:hover {
+    background-color: #218838;
+}
+
+.answer-content {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #f0fff4;
+    border-radius: 6px;
+    border-left: 4px solid var(--accent-color);
+}
+
+.correct-answer {
+    font-size: 16px;
+    font-weight: bold;
+    color: #d9534f;
+    margin-bottom: 10px;
+}
+
+.explanation {
+    font-size: 14px;
+    white-space: pre-line;
+    line-height: 1.6;
+}
+
+.hidden {
+    display: none !important;
+}

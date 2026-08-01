@@ -186,6 +186,12 @@ D. 7が表示される`,
         explanation: `起動パラメータの問題。空白のみで区切る。ダブルクォーテーションは反映されない。エスケープされると、ダブルクォーテーションも文字として反映される。また、空白を含めた文字をパラメータに指定したい場合は、ダブルクォーテーションで区切る。（スペースがないものは1つの塊とみなされるため、直後に空白がなければ連結される）
 今回実行すると、①a ②" ③a" ④a b ⑤c が表示される。（今回はlengthなので、正解は5）。`
     },
+
+    
+// ==========================================
+// 2章 問題データベース
+// ==========================================
+
     {
         id: 1,
         chapter: "ch02",
@@ -411,7 +417,8 @@ F. 実行時に例外がスローされる`,
         answer: "A",
         explanation: `Stringオブジェクトは不変（Immutable）です。
 replaceAll などの操作メソッドを実行しても、元の文字列自身が変更されることはなく、置換された新しい String オブジェクトが返されるだけです。
-hello メソッド内ではその戻り値を保持していないため、変数 str の値は「hoge, world.」のまま変更されません。`
+hello メソッド内ではその戻り値を保持していないため、変数 str の値は「hoge, world.」のまま変更されません。
+replaceAll()メソッドは、「対象の文字を置換する」メソッド。`
     },
     {
         id: 11,
@@ -431,7 +438,8 @@ E. コンパイルエラーが発生する
 F. 実行時に例外がスローされる`,
         answer: "F",
         explanation: `String のインデックスは 0 から始まります。"abcde" の長さは 5 なので、インデックスは 0～4 となります。
-charAt(5) を呼び出すと、存在しない範囲を指定したため実行時に java.lang.StringIndexOutOfBoundsException 例外がスローされます。`
+charAt(5) を呼び出すと、存在しない範囲を指定したため実行時に java.lang.StringIndexOutOfBoundsException 例外がスローされます。
+charAt()は、対象の文字列の該当文字を参照するメソッド。 `
     },
     {
         id: 12,
@@ -544,7 +552,7 @@ F. 実行時に例外がスローされる`,
         options: `A. "Hello, ".concat("Java!")
 B. "Hello, ".append("Java!")
 C. "Hello, ".add("Java!")
-D. "Hello, "plus ("Java!")`,
+D. "Hello, ".plus ("Java!")`,
         answer: "A",
         explanation: `String クラスで文字列同士を結びつける（結合する）標準メソッドは concat() です。
 （※append() は StringBuilder や StringBuffer のメソッドです）`
@@ -568,7 +576,8 @@ E. 実行時に例外がスローされる`,
 1. 10 + 20 → 数値どうしの加算で 30
 2. 30 + "30" → 数値と文字列の結合となり "3030"
 3. "3030" + 40 → 文字列と数値の結合となり "303040"
-よって、「303040」が表示されます。`
+よって、「303040」が表示されます。
+ちなみに、一度文字列が挟まると、以後同様に文字列として扱うため、(10 + 20 + "30" + 40 + 50)の場合は、「30304050」となる。`
     },
     {
         id: 19,
@@ -588,7 +597,9 @@ D. コンパイルエラーが発生する
 E. 実行時に例外がスローされる`,
         answer: "B",
         explanation: `複合代入演算子（+=）で null 状態の String 変数に結合を行う場合、null は文字列の "null" として自動変換されます。
-元々 null だった変数は文字列 "null" になり、そこに += "null" が実行されるため "nullnull" となります。`
+元々 null だった変数は文字列 "null" になり、そこに += "null" が実行されるため "nullnull" となります。
+ちなみに、varの肩推論は、nullを扱えず、charや、intなどの基本データを扱うものも、nullは扱えない。Stringは参照型なので扱える。
+また、演算子で書く場合は、自動でnullを文字列に変換するが、.Concat()の場合はエラーになる模様。`
     },
     {
         id: 20,
@@ -598,7 +609,7 @@ E. 実行時に例外がスローされる`,
 2.     public static void main(String[] args) {
 3.         StringBuilder sb = new StringBuilder("abcde");
 4.         System.out.println(sb.capacity());
-5. }
+5.     }
 6. }`,
         options: `A. 0が表示される
 B. 5が表示される
@@ -607,7 +618,8 @@ D. 21が表示される`,
         answer: "D",
         explanation: `【StringBuilderの容量（capacity）の仕組み】
 StringBuilder の初期容量は「デフォルト16文字分のバッファ」です。
-文字列（例: "abcde"）を指定してインスタンスを生成した場合、容量は「指定した文字列の長さ (5) + デフォルトバッファ (16) = 21」となります。`
+文字列（例: "abcde"）を指定してインスタンスを生成した場合、容量は「指定した文字列の長さ (5) + デフォルトバッファ (16) = 21」となります。
+StringBuilderは、Stringと違い、可変（Mutable）で書き換え可能な結合。`
     },
     {
         id: 21,
@@ -648,5 +660,262 @@ D. 4が表示される`,
         answer: "A",
         explanation: `StringBuilder の indexOf メソッドも String と同様の動きをします。
 "abcde" の中で "bcd" が始まる位置のインデックス（'b' の位置）を返すため、1 となります。`
-    }
+    },
+// ==========================================
+// 3章 問題データベース
+// ==========================================
+    {
+        id: 1,
+        chapter: "ch03",
+        text: "次のプログラムをコンパイル、実行したときの結果として正しいものを選びなさい。(1つ選択)",
+        code: `1. public class Main {
+2.     public static void main(String[] args) {
+3.         int a = 3;
+4.         int b = a += 5;
+5.         System.out.println(a + b);
+6.     }
+7. }`,
+        options: `A. 8が表示される
+B. 10が表示される
+C. 16が表示される
+D. コンパイルエラーが発生する
+E. 実行時に例外がスローされる`,
+        answer: "C",
+        explanation: `a += 5が処理され、それがbにも代入されるため、aとbには8が入っている。`
+    },
+    {
+        id: 2,
+        chapter: "ch03",
+        text: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)",
+        code: `1. public class Sample {
+2.     public static void main(String[] args) {
+3.         int num = -10;
+4.         System.out.println(10 * -num);
+5.     }
+6. }`,
+        options: `A. 100が表示される
+B. -100が表示される
+C. コンパイルエラーが発生する
+D. 実行時に例外がスローされる`,
+        answer: "A",
+        explanation: `仮に- numでも正負が反転する。`
+    },
+    {
+        id: 3,
+        chapter: "ch03",
+        text: "次の式のうち、コンパイルエラーになるものを選びなさい。(3つ選択)",
+        code: ``,
+        options: `A. byte a = 0b10000000;
+B. short b = 128 + 128;
+C. int c = 2 * 3L;
+D. float d = 10.0;`,
+        answer: "A、C、D",
+        explanation: `リキャストの問題。
+        選択肢A：byteは、-128～127まで扱える。(8桁まで)0b10000000は128なので、オーバー。
+        選択肢B：short 型の範囲は -32,768 ～ 32,767のため、問題なし。
+        選択肢C：int型にlong型Ｌを入れようとしているため、不正解。
+        選択肢D：小数点を含むリテラルは、自動的にdouble型として扱われるため、floatにするには、10.0fとする必要がある。`
+    },
+    {
+        id: 2,
+        chapter: "ch03",
+        text: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)",
+        code: `1. public class Sample {
+2.     public static void main(String[] args) {
+3.         int num = -10;
+4.         System.out.println(10 * -num);
+5.     }
+6. }`,
+        options: `A. 100が表示される
+B. -100が表示される
+C. コンパイルエラーが発生する
+D. 実行時に例外がスローされる`,
+        answer: "A",
+        explanation: `仮に- numでも正負が反転する。`
+    },
+    {
+        id: 3,
+        chapter: "ch03",
+        text: "次の式のうち、コンパイルエラーになるものを選びなさい。(3つ選択)",
+        code: ``,
+        options: `A. byte a = 0b10000000;
+B. short b = 128 + 128;
+C. int c = 2 * 3L;
+D. float d = 10.0;`,
+        answer: "A、C、D",
+        explanation: `リキャストの問題。
+        選択肢A：byteは、-128～127まで扱える。(8桁まで)0b10000000は128なので、オーバー。
+        選択肢B：short 型の範囲は -32,768 ～ 32,767のため、問題なし。
+        選択肢C：int型にlong型Ｌを入れようとしているため、不正解。
+        選択肢D：小数点を含むリテラルは、自動的にdouble型として扱われるため、floatにするには、10.0fとする必要がある。`
+    },
+    {
+        id: 4,
+        chapter: "ch03",
+        text: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)",
+        code: `1. public class Main {
+2.     public static void main(String[] args) {
+3.         int a = 10;
+4.         int b = a++ + a + a-- - a-- + ++a;
+5.         System.out.println(b);
+6.     }
+7. }`,
+        options: `A. 7が表示される
+B. 32が表示される
+C. 33が表示される
+D. 43が表示される
+E. コンパイルエラーが発生する
+F. 実行時に例外がスローされる`,
+        answer: "B",
+        explanation: ``
+    },
+    {
+        id: 5,
+        chapter: "ch03",
+        text: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)",
+        code: `1. public class Main {
+2. public static void main(String[] args) {
+3.     boolean a = true;
+4.     boolean b = true;
+5.     System.out.println(a <= b);
+6.     }
+7. }`,
+        options: `A trueが表示される
+B. falseが表示される
+C. コンパイルエラーが発生する
+D. 実行時に例外がスローされる`,
+        answer: "C",
+        explanation: `比較演算子のうち、大小の比較演算子は数字以外のものは比べられない。`
+    },
+    {
+        id: 6,
+        chapter: "ch03",
+        text: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)",
+        code: `1. public class Main {
+2.     public static void main(String[] args) {
+3.         int a = 10;
+4.         int b = 10;
+5.         if (10 < a && 10 < b) {
+6.             a++;
+7.         }
+8.         System.out.println(a + b);
+9.     }
+10. }`,
+        options: `A. 20が表示される
+B. 21が表示される
+C. 22が表示される
+D. コンパイルエラーが発生する
+E. 実行時に例外がスローされる
+`,
+        answer: "A",
+        explanation: ``
+    },
+    {
+        id: 7,
+        chapter: "ch03",
+        text: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)",
+        code: `1. public class Main {
+2.     public static void main(String[] args) {
+3.     int a = 100, b = 20, c = 30;
+4.     System.out.println(a % b * c + a / b);
+5.     }
+6. }
+`,
+        options: `A. 5が表示される
+B. 35が表示される
+C. 90が表示される
+D. コンパイルエラーが発生する
+E. 実行時に例外がスローされる
+`,
+        answer: "A",
+        explanation: ``
+    },
+    {
+    id: 8,
+    chapter: "ch03",
+    // 交互に並べられる配列に変更
+    contents: [
+        { type: "text", value: "次のプログラムを確認してください。" },
+        { 
+            type: "code", 
+            value: `1. public class Sample {
+2.     private int num;
+3.     public Sample(int num) {
+4.         this.num = num;
+5.     }
+6. }` 
+        },
+        { type: "text", value: "このクラスを利用する以下のプログラムを、コンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1. public class Main {
+2.     public static void main(String[] args) {
+3.         Sample s1 = new Sample(10);
+4.         Sample s2 = s1;
+5.         s1 = new Sample(10);
+6.         System.out.println(s1 == s2);
+7.     }
+8. }` 
+        }
+    ],
+    options: `A. trueが表示される
+B. falseが表示される
+C. コンパイルエラーが発生する
+D. 実行時に例外がスローされる`,
+    answer: "B",
+    explanation: "5行目で新たなインスタンスを作っているため、s1とs2は同じものではなくなった。"
+},
+{
+    id: 9,
+    chapter: "ch03",
+    // 交互に並べられる配列に変更
+    contents: [
+        { type: "text", value: "次のプログラムを確認してください。" },
+        { 
+            type: "code", 
+            value: `1.  public class Sample {
+2.      private int num;
+3.      private String name;
+4.      public Sample(int num, String name) {
+5.          this.num = num;
+6.          this.name = name;
+7.      }
+8.      public boolean equals(Object obj) {
+9.          if (obj == null) {
+10.         return false;
+11.         }
+12.         if (obj instanceof Sample) {
+13.             Sample s = (Sample) obj;
+14.             return s.nun == this.num;
+15.         }
+16.         return false;
+17.     }
+18. }
+` 
+        },
+        { type: "text", value: "このクラスを利用する以下のプログラムを、コンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1. public class Main {
+2.     public static void main(String[] args) {
+3.     Sample a = new Sample(10, "a");
+4.     Sample b = new Sample(10, "b");
+5.     System.out.println(a.equals(b));
+6.     }
+7. }
+` 
+        }
+    ],
+    options: `A. trueが表示される
+B. falseが表示される
+C. Sampleクラスでコンパイルエラーが発生する
+D. Mainクラスでコンパイルエラーが発生する
+E. 実行時に例外がスローされる
+`,
+    answer: "A",
+    explanation: ""
+},
+
+
+
 ];

@@ -55,12 +55,31 @@ document.addEventListener('DOMContentLoaded', () => {
             card.className = 'question-card';
             card.setAttribute('data-chapter', q.chapter);
 
-            let codeHtml = '';
-            if (Array.isArray(q.code)) {
-                codeHtml = q.code.map(c => `<pre class="code-block"><code>${escapeHtml(c)}</code></pre>`).join('');
-            } else if (q.code) {
-                codeHtml = `<pre class="code-block"><code>${escapeHtml(q.code)}</code></pre>`;
+            // --- ここから追加・修正箇所 ---
+            let bodyAndCodeHtml = '';
+
+            // 1. 新しい「contents」形式（テキストとコードの交互表示）に対応
+            if (Array.isArray(q.contents)) {
+                bodyAndCodeHtml = q.contents.map(item => {
+                    if (item.type === 'text') {
+                        return `<div class="question-body">${escapeHtml(item.value)}</div>`;
+                    } else if (item.type === 'code') {
+                        return `<pre class="code-block"><code>${escapeHtml(item.value)}</code></pre>`;
+                    }
+                    return '';
+                }).join('');
+            } else {
+                // 2. 従来の「text」と「code」形式への互換処理
+                if (q.text) {
+                    bodyAndCodeHtml += `<div class="question-body">${escapeHtml(q.text)}</div>`;
+                }
+                if (Array.isArray(q.code)) {
+                    bodyAndCodeHtml += q.code.map(c => `<pre class="code-block"><code>${escapeHtml(c)}</code></pre>`).join('');
+                } else if (q.code) {
+                    bodyAndCodeHtml += `<pre class="code-block"><code>${escapeHtml(q.code)}</code></pre>`;
+                }
             }
+            // --- ここまで ---
 
             const optionsHtml = buildOptionsHtml(q.options);
 
@@ -69,8 +88,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span class="chapter-tag">${chapterTitles[q.chapter] || ''}</span>
                 </div>
                 <div class="question-title">問題 ${q.id}</div>
-                <div class="question-body">${escapeHtml(q.text)}</div>
-                ${codeHtml}
+                
+                <!-- テキスト・コード群の出力 -->
+                ${bodyAndCodeHtml}
                 
                 <div class="options-container">
                     ${optionsHtml}

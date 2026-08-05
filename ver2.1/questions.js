@@ -4,7 +4,9 @@
 const chapterTitles = {
     "ch01": "1章 簡単なJavaプログラムの作成",
     "ch02": "2章 Javaの基本データ型の使用",
-    "ch03": "3章 演算子と判定構造"
+    "ch03": "3章 演算子と判定構造",
+    "ch04": "4章 制御構造",
+    
 };
 
 // ==========================================
@@ -717,39 +719,6 @@ D. float d = 10.0;`,
         選択肢D：小数点を含むリテラルは、自動的にdouble型として扱われるため、floatにするには、10.0fとする必要がある。`
     },
     {
-        id: 2,
-        chapter: "ch03",
-        text: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)",
-        code: `1. public class Sample {
-2.     public static void main(String[] args) {
-3.         int num = -10;
-4.         System.out.println(10 * -num);
-5.     }
-6. }`,
-        options: `A. 100が表示される
-B. -100が表示される
-C. コンパイルエラーが発生する
-D. 実行時に例外がスローされる`,
-        answer: "A",
-        explanation: `仮に- numでも正負が反転する。`
-    },
-    {
-        id: 3,
-        chapter: "ch03",
-        text: "次の式のうち、コンパイルエラーになるものを選びなさい。(3つ選択)",
-        code: ``,
-        options: `A. byte a = 0b10000000;
-B. short b = 128 + 128;
-C. int c = 2 * 3L;
-D. float d = 10.0;`,
-        answer: "A、C、D",
-        explanation: `リキャストの問題。
-        選択肢A：byteは、-128～127まで扱える。(8桁まで)0b10000000は128なので、オーバー。
-        選択肢B：short 型の範囲は -32,768 ～ 32,767のため、問題なし。
-        選択肢C：int型にlong型Ｌを入れようとしているため、不正解。
-        選択肢D：小数点を含むリテラルは、自動的にdouble型として扱われるため、floatにするには、10.0fとする必要がある。`
-    },
-    {
         id: 4,
         chapter: "ch03",
         text: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)",
@@ -915,7 +884,348 @@ E. 実行時に例外がスローされる
     answer: "A",
     explanation: ""
 },
+{
+    id: 10,
+    chapter: "ch03",
+    contents: [
+        { type: "text", value: "次のプログラムを確認してください。" },
+        { 
+            type: "code", 
+            value: `1.  public class Sample {
+2.      private int num;
+3.      public Sample(int num) {
+4.          this.num = num;
+5.      }
+6.      public boolean equals(Sample obj) {
+7.          if (obj == null) {
+8.              return false;
+9.          }
+10.         return this.num == obj.num;
+11.      }
+12. }` 
+        },
+        { type: "text", value: "このクラスを利用する以下のプログラムを、コンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1. public class Main {
+2.     public static void main(String[] args) {
+3.         Object a = new Sample(10);
+4.         Object b = new Sample(10);
+5.         System.out.println(a.equals(b));
+6.     }
+7. }
+` 
+        }
+    ],
+    options: `A. Sampleクラスでコンパイルエラーが発生する
+B. Mainクラスでコンパイルエラーが発生する
+C. 「true」 と表示される
+D. 「false」 と表示される
+E. 実行時に例外がスローされる
+`,
+    answer: "D",
+    explanation: ""
+},
+{
+        id: 11,
+        chapter: "ch03",
+        text: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)",
+        code: `1. public class Main {
+2.     public static void main(String[] args) {
+3.         Object a = new Object();
+4.         Object b = null;
+5.         System.out.println(a.equals(b));
+6.     }
+7. }
+`,
+        options: `A. trueが表示される
+B. falseが表示される
+C. コンパイルエラーが発生する
+D. 実行時に例外がスローされる
+`,
+        answer: "B",
+        explanation: ``
+    },
+    {
+        id: 12,
+        chapter: "ch03",
+        text: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)",
+        code: `1. public class Main {
+2.     public static void main(String[] args) {
+3.         String a = "sample";
+4.         String b = "sample";
+5.         System.out.print(a == b);
+6.         System.out.print(", ");
+7.         System.out.println(a.equals(b));
+8.     }
+9. }
+`,
+        options: `A. 「false, true」と表示される
+B. 「false, false」と表示される
+C. 「true, false」と表示される
+D. 「true, true」と表示される
+`,
+        answer: "D",
+        explanation: ``
+    },
+    {
+        id: 13,
+        chapter: "ch03",
+        text: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)",
+        code: `1. public class Main {
+2.     public static void main(String[] args) {
+3.         String a = new String("sample");
+4.         String b = "sample":
+5.         System.out.print(a == b);
+6.         System.out.print(", ");
+7.         System.out.println(a.equals(b));
+8.     }
+9. }
+`,
+        options: `A. 「false, true」と表示される
+B. 「false, false」と表示される
+C. 「true, false」と表示される
+D. 「true, true」と表示される
+`,
+        answer: "A",
+        explanation: ``
+    },
+    {
+        id: 14,
+        chapter: "ch03",
+        text: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)",
+        code: `1.  public class Main {
+2.      public static void main(String[] args) {
+3.
+4.          String a = "abc";
+5.          String b = new String(a);
+6.
+7.          int count = 0;
+8.          if (a. intern() == "abc") {
+9.              count++;
+10.         }
+11.         if (b.intern() == "abc") {
+12.             count++;
+13.         }
+14.         if (a. intern() == b. intern()) {
+15.             count++;
+16.         }
+17.         System.out.println(count);
+18.     }
+19. }
+`,
+        options: `A. 0が表示される
+B. 1が表示される
+C. 2が表示される
+D. 3が表示される
+`,
+        answer: "D",
+        explanation: ``
+    },
+    {
+        id: 15,
+        chapter: "ch03",
+        text: "次のプログラムを実行し、「ok」と表示したい。4行目の空欄に入るコードとして、正しいものを選びなさい。(1つ選択)",
+        code: `1. public class Main {
+2.     public static void main(String[] args) {
+3.         int num = 10;
+4.         □□□□□□□□□□□□□□
+5.             System.out.println("ok");
+6.     }
+7. }
+`,
+        options: `A if (num <= 10)
+B. if num <= 10
+C. if (num < 10) then
+D. if num <= 10 then
+`,
+        answer: "A",
+        explanation: `if文の{}は、省略可能。その場合、次の一文のみ対象になる。`
+    },
+    {
+        id: 16,
+        chapter: "ch03",
+        text: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)",
+        code: `1. public class Main {
+2.     public static void main(String[] args) {
+3.         if (false)
+4.         System.out.println("A");
+5.         System.out.println("B");
+6.     }
+7. }
+`,
+        options: `A. 「A」と表示される
+B. 「B」と表示される
+C. 「A」「B」と表示される
+D. 何も表示されない
+E. コンパイルエラーが発生する
+F. 実行時に例外がスローされる
+`,
+        answer: "B",
+        explanation: `if文の{}は、省略可能。その場合、次の一文のみ対象になる。`
+    },
+    {
+        id: 17,
+        chapter: "ch03",
+        text: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)",
+        code: `1.  public class Main {
+2.      public static void main(String[] args) {
+3.          int num = 10;
+4.          if (num < 10)
+5.              System.out.println("A");
+6.          else
+7.              System.out.println("B");
+8.          if (num == 10)
+9.              System.out.println("C");
+10.     }
+11. }
 
-
+`,
+        options: `A. 「A」「B」「C」と表示される
+B. 「A」「C」と表示される
+C. 「B」「C」と表示される
+D. 「A」と表示される
+E. 「B」と表示される
+F. 「C」と表示される
+`,
+        answer: "C",
+        explanation: ``
+    },
+    {
+        id: 18,
+        chapter: "ch03",
+        text: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)",
+        code: `1.  public class Main {
+2.      public static void main(String[] args) {
+3.          int num = 10;
+4.          if (num == 100)
+5.              System.out.println("A");
+6.          else if (10 < num)
+7.              System.out.println("B");
+8.          else
+9.          if (num == 10)
+10.             System.out.println("C");
+11.         else
+12.         if (num == 10)
+13.             Systen.out.println("D");
+14.     }
+15. }
+`,
+        options: `A. Cが表示される
+B. Dが表示される
+C. CとDが表示される
+D. 何も表示されない
+E. コンパイルエラーが発生する
+E. 実行時に例外がスローされる
+`,
+        answer: "A",
+        explanation: ``
+    },
+    {
+        id: 19,
+        chapter: "ch03",
+        text: "switch文の条件式が戻せる型として、正しいものを選びなさい。(6つ選択)",
+        code: ``,
+        options: `A. char
+B. byte
+C. short
+D. int
+E. long
+F. String
+G. enum
+H. boolean
+`,
+        answer: "A、B、C、D、F、G",
+        explanation: `char,byte,short,int,Character,Byte,Short,Integer,String,Enum
+基本的には、以下のパターン。
+・Int型以下の整数型とそのラッパークラス
+・文字と文字列
+・列挙型`
+    },
+    {
+        id: 20,
+        chapter: "ch03",
+        text: "次のプログラムのコンパイルエラーが発生するのは何行目か。正しいものを選びなさい。(2つ選択)",
+        code: `1.  public class Main {
+2.      public static void main(String[] args) {
+3.          final int NUM = 0;
+4.          int num = 10;
+5.          switch (num) {
+6.          case "10":    System.out.println("A");
+7.                        break:
+8.          case num :    Systen.out.println("B");
+9.                        break;
+10.         case 2*5 :    System.out.println("C");
+11.                       break;
+12.         case NUM :    System.out.println("D");
+13.                       break;
+14.         }
+15.     }
+16. }
+`,
+        options: `A. 6行目
+B. 8行目
+C. 10行目
+D. 12行目
+`,
+        answer: "A、B",
+        explanation: ``
+    },
+    {
+        id: 21,
+        chapter: "ch03",
+        text: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)",
+        code: `1.  public class Main {
+2.      public static void main(String[] args) {
+3.          int num = 1;
+4.          switch (num) {
+5.          case 1:
+6.          case 2:
+7.          case 3: System.out.println("A");
+8.          case 4: System.out.println("B");
+9.          default:
+10.             System.out.println("C");
+11.         }
+12.     }
+13. }
+`,
+        options: `A. 「A」と表示される
+B. 「A」「B」と表示される
+C. 「A」「B」「C」と表示される
+D. 何も表示されない
+E. コンパイルエラーが発生する
+F. 実行時に例外がスローされる
+`,
+        answer: "C",
+        explanation: `break文がないと、下の条件式もすべて実行される。`
+    },
+    {
+        id: 1,
+        chapter: "ch04",
+        text: "コンソールに0~4までの数字を順に表示したい。プログラムの5行目の空欄に入るコードとして、正しいものを選びなさい。(1つ選択)",
+        code: `1.  public class Main {
+2.      public static void main(String[] args) {
+3.          int a = 11;
+4.          int b = 0;
+5.          while ( □□□□□□□□ ) {
+6.              if (5 < a) {
+7.                  System.out.println(b);
+8.              }
+9.              a--;
+10.             b++;
+11.         }
+12.     }
+13. }
+`,
+        options: `A. b < 5
+B. 5 < b
+C. 5 < a
+D. a < 5
+E. true
+F. false
+`,
+        answer: "A",
+        explanation: ``
+    },
 
 ];

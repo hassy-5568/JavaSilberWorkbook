@@ -2746,6 +2746,297 @@ D. 実行時に例外がスローされる
     answer: "B",
     explanation: ""
 },
+// ==========================================
+// 7章 問題データベース
+// ==========================================
+    {
+    id: 1,
+    chapter: "ch07",
+    contents: [
+        { type: "text", value: "次のプログラムを確認してください。" },
+        { 
+            type: "code", 
+            value: `1. public class Child extends Parent {
+2.     Child( ) {
+3.         name = "java";
+4.     }
+5.     void hello( ) {
+6.         System.out.println("hello, " + name);
+7.     }
+8. }
+` },
+        { type: "text", value: "このクラスが継承しているParentクラスの説明として、正しいものを選びなさい。(1つ選択)" },
+        ],
+    options: `A. Parentクラスは、helloメソッドの定義を持っていなければいけない
+B. Parentクラスには、フィールドを初期化するためのコンストラクタを定義しなければいけない
+C. Parentクラスには、helloフィールドを定義しなければいけない
+D. Parentクラスには、nameフィールドを定義しなければいけない
+`,
+    answer: "D",
+    explanation: "クラスの継承問題。子クラスで定義されていないものは、親クラスで定義している必要がある。"
+},
+{
+        id: 2,
+        chapter: "ch07",
+        text: "継承の説明として正しいものを選びなさい。(1つ選択)",
+        code: "",
+        options: `A. アクセス修飾子がデフォルトのままのフィールドは、すべてのサブクラスのメソッドからアクセスできる
+B. アクセス修飾子がprivateなメソッドであっても、サブクラスからは利用できる
+C. サブクラスであっても、コンストラクタは引き継がない
+D. アクセス修飾子がprotectedなメソッドには、同じパッケージに属するサブクラスのみアクセスできる
+`,
+        answer: "C",
+        explanation: ""
+    },
+    {
+        id: 3,
+        chapter: "ch07",
+        text: "インタフェースに関する説明として、正しいものを選びなさい。(2つ選択)",
+        code: "",
+        options: `A. アクセス修飾子を省略しても、publicなメソッドとして扱われる
+B. フィールドは一切定義できない
+C. クラスは複数のインタフェースを同時に実現できない
+D. インタフェースを継承することはできない
+E. 抽象クラスは、インタフェースに定義されているメソッドを実現しなくてもよい
+`,
+        answer: "A、E",
+        explanation: ""
+    },
+    {
+    id: 4,
+    chapter: "ch07",
+    contents: [
+        { type: "text", value: "次のプログラムの説明として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1. public interface A {
+2.     void sample( ) {
+3.         System.out.println("sample");
+4.     }
+5. }
+` },
+        { 
+            type: "code", 
+            value: `1. public class B implements A {
+2.
+3. }
+` },
+{ 
+            type: "code", 
+            value: `1. public class Main {
+2.     public static void main(String[] args) {
+3.         A a = new B();
+4.         a.sample();
+5.     }
+6. }
+` },
+        ],
+    options: `A インタフェースAのsampleメソッドをdefaultで修飾しなければいけない
+B. インタフェースAのsampleメソッドを削除し、Bクラスにsampleメソッドを追加しなければいけない
+C. 実行時に例外がスローされる
+D. 「sample」と表示される
+`,
+    answer: "A",
+    explanation: "クラスの継承問題。子クラスで定義されていないものは、親クラスで定義している必要がある。"
+},
+{
+    id: 5,
+    chapter: "ch07",
+    contents: [
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1. public interface A {
+2.     @Override
+3.     default String toString() {
+4.         return "A";
+5.     }
+6. }
+` },
+        { 
+            type: "code", 
+            value: `1. public class B implements A {
+2.     @Override
+3.     public String toString() {
+4.         return "B";
+5.     }
+6. }
+` },
+{ 
+            type: "code", 
+            value: `1. public class Main {
+2.     public static void main(String[] args) {
+3.         А а = пеw В();
+4.         System.out.println(a);
+5.     }
+6. }
+` },
+        ],
+    options: `A. Aインタフェースでコンパイルエラーとなる
+B. Bクラスでコンパイルエラーとなる
+C. Aが表示される
+D. Bが表示される
+E. 実行時に例外がスローされる
+`,
+    answer: "A",
+    explanation: ""
+},
+{
+    id: 6,
+    chapter: "ch07",
+    contents: [
+        { type: "text", value: "以下に示すコードをコンパイル、実行し、次のような結果を表示したい。 Cクラスの空欄に入るコードとして正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `Hello
+Java` },
+        { 
+            type: "code", 
+            value: `1. public interface A {
+2.     default void sample() {
+3.         System.out.println("Hello");
+4.     }
+5. }
+` },
+{ 
+            type: "code", 
+            value: `1. public interface B extends A {
+2. 
+3. }
+` },
+{ 
+            type: "code", 
+            value: `1. public class C implements B {
+2.     @Override
+3.     public void sample() {
+4.         □□□□□□□
+5.         System.out.println("Java");
+6.     }
+7. }
+` },
+{ 
+            type: "code", 
+            value: `1. public class Main {
+2.     public static void main(String[] args) {
+3.         А а = пеw C();
+4.         a.sample();
+5.     }
+6. }
+` },
+],
+    options: `A. super.sample();
+B. A.super.sample();
+C. public.sample();
+D. new.sample();
+E. 上記のいずれも誤りである
+`,
+    answer: "E",
+    explanation: ""
+},
+{
+    id: 7,
+    chapter: "ch07",
+    contents: [
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `Hello
+Java` },
+        { 
+            type: "code", 
+            value: `1. public interface A {
+2.     default void test() {
+3.         System.out.println("A");
+4.     }
+5. }
+` },
+{ 
+            type: "code", 
+            value: `1. public interface B {
+2.     default void test() {
+3.         System.out.println("B");
+4.     }
+5. }
+` },
+{ 
+            type: "code", 
+            value: `1. public class Main implements A, B {
+2.     public static void main(String[] args) {
+3.         new Main().test();
+4.     }
+5. }
+` },
+],
+    options: `A. Aが表示される
+B. Bが表示される
+C. コンパイルエラーが発生する
+D. 実行時に例外がスローされる
+`,
+    answer: "C",
+    explanation: ""
+},
+{
+    id: 8,
+    chapter: "ch07",
+    contents: [
+        { type: "text", value: "抽象クラスに関する説明として、正しいものを選びなさい。(3つ選択)" },
+        ],
+    options: `A. インスタンスを生成することはできない
+B. 抽象クラスのメソッドはオーバーライドできない
+C. サブクラスから抽象クラスの公開フィールドに自由にアクセスできる
+D. 抽象クラスを継承した抽象クラスを定義できる
+E. 抽象メソッドは、すべてのサブクラスが実装しなければいけない
+`,
+    answer: "A、C、D",
+    explanation: ""
+},
+{
+    id: 9,
+    chapter: "ch07",
+    contents: [
+        { type: "text", value: "次のプログラムを確認してください。" },
+        { 
+            type: "code", 
+            value: `1. abstract class AbstractSample {
+2.     public void sample() {
+3.         System.out.println("A");
+4.         test();
+5.         System.out.println("C");
+6.     }
+7.     protected abstract void test();
+8. }
+` },
+        { 
+            type: "code", 
+            value: `1. class ConcreteSample extends AbstractSample {
+2.     protected void test() {
+3.         System.out.println("B");
+4.     }
+5. }
+` },
+{ 
+            type: "text", 
+            value: `これらのクラスを利用する以下のプログラムを、コンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)` },
+{ 
+            type: "code", 
+            value: `1. public class Main {
+2.     public static void main(String[] args) {
+3.         AbstractSamples new ConcreteSample();
+4.         s.sample();
+5.     }
+6. }
+` },
+],
+    options: `A. 「A」「B」「C」と表示される
+B. 「A」「C」と表示される
+C. AbstractSampleクラスでコンパイルエラーが発生する
+D. ConcreteSampleクラスでコンパイルエラーが発生する
+E. Mainクラスでコンパイルエラーが発生する
+F. 実行時に例外がスローされる
+`,
+    answer: "A",
+    explanation: ""
+},
 
-    
+
 ];

@@ -66,6 +66,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     } else if (item.type === 'code') {
                         return `<pre class="code-block"><code>${escapeHtml(item.value)}</code></pre>`;
                     }
+                    else if (item.type === 'math') {
+                    // 数式(KaTeX)の描画領域を出力
+                    const html = katex.renderToString(item.value, { throwOnError: false });
+                    return `<div class="math-block" style="font-size: 1.2em; margin: 10px 0; text-align: center;">${html}</div>`;
+                    }
+                    else if (item.type === 'image') {
+                        // 画像要素の追加処理
+                        return `<div class="question-image-container">
+                            <img src="${escapeHtml(item.src)}" alt="${escapeHtml(item.alt || '問題画像')}" class="question-image">
+                        </div>`;
+                    }
                     return '';
                 }).join('');
             } else {

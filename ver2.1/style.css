@@ -41,7 +41,12 @@ h1 {
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
     position: sticky;
     top: 20px;
+    /* 修正箇所：画面の高さに合わせてスクロールさせる指定 */
+    max-height: calc(100vh - 40px); /* 画面全体の高さから上下余白(20px×2)を引く */
+    overflow-y: auto;               /* 縦に溢れた場合にスクロールバーを出す */
+    box-sizing: border-box;
 }
+
 
 /* 右カラム：問題一覧 */
 .main-content {
@@ -91,6 +96,20 @@ h2 {
     padding: 20px;
     margin-bottom: 20px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+/* 問題画像用のスタイル */
+.question-image-container {
+    text-align: center;
+    margin: 15px 0;
+}
+
+.question-image {
+    max-width: 100%;       /* カード枠からはみ出さない */
+    height: auto;          /* 縦横比を維持 */
+    max-height: 300px;     /* 必要に応じて高さを制限 */
+    border-radius: 6px;
+    border: 1px solid var(--border-color); /* 必要に応じて枠線を追加 */
 }
 
 .question-header {

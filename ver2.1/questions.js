@@ -10,6 +10,10 @@ const chapterTitles = {
     "ch06": "6章 インスタントとメソッド",
     "ch07": "7章 クラスの継承、インタフェース、抽象クラス",
     "ch08": "8章 関数型インターフェース、ラムダ式",
+    "ch09": "9章 API",
+    "ch10": "10章 例外処理",
+    "ch11": "11章 モジュールシステム",
+    "ch12": "12章 総仕上げ問題①",
    
 };
 
@@ -3638,6 +3642,1416 @@ E. 実行時に例外がスローされる
 B. Supplier<Sample> x = s -> list.contains(s);
 C. Consumer<Sample> x = s -> list.contains(s);
 D. Function<Sample> x = s -> list.contains(s);
+`,
+    answer: "A",
+    explanation: ""
+},
+{
+    id: 6,
+    chapter: "ch08",
+    contents:[
+        { type: "text", value: "java.util.function パッケージに属する関数型インタフェースで、引数を受け取らず、結果を戻すためのものを選びなさい。(1つ選択)" },
+        ],
+    options: `A. Consumer
+B. Function
+C. Supplier
+D. Predicate
+`,
+    answer: "C",
+    explanation: ""
+},
+{
+    id: 7,
+    chapter: "ch08",
+    contents:[
+        { type: "text", value: "次のプログラムの空欄に入るコードとして、正しいものを選びなさい。 (1つ選択)" },
+        { 
+            type: "code", 
+            value: `1. import java.util.function.*;
+2.
+3. public class Main {
+4.     public static void main(String[] args) {
+5.         □□□□□□<String, Integer> func = (str) -> {
+6.             return Integer.parseInt(str);
+7.         };
+8.         System.out.println(func.apply("100") * 2);
+9.     }
+10. }
+`},
+],
+    options: `A. Consumer
+B. Function
+C. Supplier
+D. Predicate
+`,
+    answer: "B",
+    explanation: ""
+},
+{
+    id: 8,
+    chapter: "ch08",
+    contents:[
+        { type: "text", value: "java.util.function.Consumerの説明として、正しいものを選びなさい。" },
+        ],
+    options: `A. 引数を受け取り、その値を使って処理だけ行い、結果は戻さない
+B. 引数を受け取らずに、結果だけを戻す
+C. 引数を受け取り判定を行う
+D. 引数を受け取り、それを使って何らかの処理をし、その処理結果を戻す
+`,
+    answer: "A",
+    explanation: ""
+},
+{
+    id: 1,
+    chapter: "ch09",
+    contents:[
+        { type: "text", value: "次の計算式を使い、毎年積立を行って複利運用したときの金額を計算したい。この計算を行うコードとして正しいものを選びなさい。(1つ選択)" },
+        { type: "math", value: "n = m \\frac{(1 + r)^x - 1}{r}" },
+        { 
+            type: "text", 
+            value: "n : 受け取り総額\nm : 毎年の積立額\nr : 年利率\nx : 年数" 
+        },
+        
+],
+    options: `A. n = (int) (m * (Math.pow((1 + r), x) - 1) / r);
+B. n = (int) (m * (Math.pow(x, (1 + r)) - 1) / г);
+C. n = (int) (m * (Math.sqrt((1 + r)) - 1) / r);
+D. n = (int) (m * (Math.sqrt((1 + r), x) - 1) / г);
+`,
+    answer: "B",
+    explanation: ""
+},
+{
+    id: 2,
+    chapter: "ch09",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1.  public class Sample {
+2.      private int id:
+3.      private String name;
+4.      public Sample(int id, String name) {
+5.          super();
+6.          this.id = id;
+7.          this.name = name;
+8.      }
+9.      public int getId() {
+10.         return id;
+11.     }
+12.     public String getName(){
+13.         return name;
+14.     }
+15. }
+`},
+{ 
+            type: "code", 
+            value: `1.  import java.util.Comparator;
+2.
+3.  public class SampleComparator implements Comparator<Sample> {
+4.      @Override
+5.      public int compare (Sample s1, Sample s2) {
+6.          if (s1.getId() < s2.getId()) {
+7.              return 1;
+8.          }
+9.          if (s2.getId() < s1.getId()) {
+10.             return -1;
+11.         }
+12.         return 0;
+13.     }
+14. }
+`},
+{ 
+            type: "code", 
+            value: `1.  import java.util.ArrayList;
+2.  import java.util.Arrays;
+3.  import java.util.List;
+4.
+5.  public class Main {
+6.      public static void main(String[] args) {
+7.          Sample[ ] samples = {
+8.              new Sample(2, "B"),
+9.              new Sample(3, "C"),
+10.             new Sample(1, "A")
+11.         };
+12.         List<Sample> list = new ArrayList<Sample>(Arrays.asList(samples));
+13.         list.sort(new SampleComparator());
+14.         for (Sample s: list) {
+15.              System.out.println(s.getName());
+16.         }
+17.     }
+18. }
+`},
+],
+    options: `A. 「A」「B」「C」と表示される
+B. 「B」「C」「A」と表示される
+C. 「C」「B」「A」と表示される
+D. 何も表示されない
+`,
+    answer: "C",
+    explanation: ""
+},
+{
+    id: 3,
+    chapter: "ch09",
+    contents:[
+        { type: "text", value: "次のプログラムを実行し、「3」 「2」 「1」と表示したい。空欄に入るコードとして正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1.  import java.util.Arrays;
+2.  import java.util.List;
+3.
+4.  public class Main {
+5.      public static void main(String[] args) {
+6.          List<Integer> list = Arrays.asList(new Integer[] {1, 2, 3});
+7.          □□□□□□□
+8.          for (Integer num: list) {
+9.              System.out.println(num);
+10.         }
+11.     }
+12. }
+`},
+],
+    options: `A. list.sort((a, b) -> a.compareTo(b));
+B. list.sort(() -> a. compareTo(b));
+C. list.sort((a) -> a. compareTo(b));
+D. list.sort((a, b) -> -a.compareTo(b));
+`,
+    answer: "D",
+    explanation: ""
+},
+{
+    id: 4,
+    chapter: "ch09",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイルし、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1.  public class Sample {
+2.      public static void main(String[] args) {
+3.          char a = '0';
+4.          int num = 0;
+5.          if (Character.isAlphabetic(a)) {
+6.              num++;
+7.          }
+8.          if (Character.isDigit(a)) {
+9.              num++;
+10.         }
+11.         if (Character.isLowerCase(a)) {
+12.             num++;
+13.         }
+14.         System.out.println(num);
+15.     }
+16. }
+`},
+],
+    options: `A. 0が表示される
+B. 1が表示される
+C. 2が表示される
+D. 3が表示される
+E. コンパイルエラーが発生する
+`,
+    answer: "B",
+    explanation: ""
+},
+{
+    id: 5,
+    chapter: "ch09",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1. import java. time. LocalDate;
+2.
+3. public class Sample {
+4.     public static void main(String[] args) {
+5.         LocalDate a = LocalDate.of(2015, 0, 1);
+6.         LocalDate b = LocalDate.parse("2015-01-01");
+7.         System.out.println(a.equals(b));
+8.     }
+9. }
+`},
+],
+    options: `A. trueが表示される
+B. falseが表示される
+C. 5行目でコンパイルエラーが発生する
+D. 6行目でコンパイルエラーが発生する
+E. 実行時に例外がスローされる
+`,
+    answer: "E",
+    explanation: ""
+},
+{
+    id: 6,
+    chapter: "ch09",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイルし、実行したときの結果として、正しいものを選びなさい。なお、現在の日付を2019年8月20日とする。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1.  import java. time. DayOfWeek;
+2.  import java. time. LocalDate:
+3.
+4.  public class Sample {
+5.      public static void main(String[] args) {
+6.          LocalDate a = LocalDate.of (2019,8,19);
+7.          LocalDate b = LocalDate.now();
+8.          b.with(DayOfWeek.MONDAY);
+9.          System.out.println(a.equals(b)
+10.             + ", " + a.isBefore(b));
+11.     }
+12. }
+`},
+],
+    options: `A 「true, true」と表示される
+B. 「false, false」と表示される
+C. 「true, false」と表示される
+D. 「false, true」と表示される
+`,
+    answer: "D",
+    explanation: ""
+},
+{
+    id: 7,
+    chapter: "ch09",
+    contents:[
+        { type: "text", value: "次のうち、ArrayListの説明として正しいものを選びなさい。(3つ選択)" },
+],
+    options: `A. nullは扱えない
+B. 動的な配列として動作する
+C. 重複した値は扱えない
+D. スレッドセーフではない
+E. 値を追加する箇所を制御できる
+`,
+    answer: "B、D、E",
+    explanation: ""
+},
+{
+    id: 8,
+    chapter: "ch09",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1.  import java.util.ArrayList;
+2.
+3.  public class Main {
+4.      public static void main(String[] args) {
+5.          ArrayList list = new ArrayList<>();
+6.          list.add("A");
+7.          list.add(10);
+8.          list.add('B');
+9.          for (Object obj: list) {
+10.             System.out.print(obj);
+11.         }
+12.     }
+13. }
+`},
+],
+    options: `A. 5行目でコンパイルエラーが発生する
+B. 6行目でコンパイルエラーが発生する
+C. 7行目でコンパイルエラーが発生する
+D. 8行目でコンパイルエラーが発生する
+E. 9行目でコンパイルエラーが発生する
+F. 「A10B」と表示される
+G. 実行時に例外がスローされる
+`,
+    answer: "F",
+    explanation: ""
+},
+{
+    id: 9,
+    chapter: "ch09",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1.  import java.util.ArrayList;
+2.
+3.  public class Main {
+4.      public static void main(String[] args) {
+5.          ArrayList<String> list = new ArrayList<>();
+6.          list.add("A");
+7.          list.add(2, "B");
+8.          list.add("C");
+9.          list.add("D");
+10.         for (String str: list) {
+11.             System.out.print(str);
+12.         }
+13.     }
+14. }
+`},
+],
+    options: `A. 「ABCD」と表示される
+B. 「ACBD」と表示される
+C. 「ACDB」と表示される
+D. コンパイルエラーが発生する
+E. 実行時に例外がスローされる
+`,
+    answer: "E",
+    explanation: ""
+},
+{
+    id: 10,
+    chapter: "ch09",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1.  import java.util.ArrayList;
+2.
+3.  public class Main {
+4.      public static void main(String[] args) {
+5.          ArrayList<String> list = new ArrayList<>();
+6.          list.add("A");
+7.          list.set(0, "B");
+8.          list.add("C");
+9.          list.set(1, "D");
+10.         for (String str: list) {
+11.             System.out.print(str);
+12.         }
+13.     }
+14. }
+`},
+],
+    options: `A. 「BD」と表示される
+B. 「AD」と表示される
+C. 「BC」と表示される
+D. 「BCD」 と表示される
+E. 「ABCD」と表示される
+F. コンパイルエラーが発生する
+G. 実行時に例外がスローされる
+`,
+    answer: "A",
+    explanation: ""
+},
+{
+    id: 11,
+    chapter: "ch09",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1.  public class Item {
+2.      private String name;
+3.      private int price;
+4.      public Item(String name, int price) {
+5.          this.name = name;
+6.          this.price = price;
+7.      }
+8.      public boolean equals(Object obj) {
+9.          if (obj instanceof Item) {
+10.             Item tmp = (Item) obj;
+11.             if (tmp.name.equals(this.name)) {
+12.                 return true;
+13.             }
+14.         }
+15.         return false;
+16.     }
+17.     public String getName() {
+18.         return name;
+19.     }
+20. }
+`},
+{ 
+            type: "code", 
+            value: `1.  import java.util.ArrayList;
+2.
+3.  public class Main {
+4.      public static void main(String[] args) {
+5.          ArrayList<Item> list = new ArrayList<>();
+6.          list.add(new Item("A", 100));
+7.          list.add(new Item("B", 200));
+8.          list.add(new Item("C", 300));
+9.          list.add(new Item("A", 100));
+10.         list.remove(new Item("A", 500));
+11.         for (Item item: list) {
+12.             System.out.println(item.getName());
+13.         }
+14.     }
+15. }
+`},
+],
+    options: `A. 「A」「B」「C」「A」と表示される
+B. 「B」「C」「A」と表示される
+C. 「B」「C」と表示される
+D. コンパイルエラーが発生する
+E. 実行時に例外がスローされる
+`,
+    answer: "C",
+    explanation: ""
+},
+{
+    id: 12,
+    chapter: "ch09",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1.  import java.util.ArrayList;
+2.
+3.  public class Main {
+4.      public static void main(String[] args) {
+5.          ArrayList<String> list = new ArrayList<>();
+6.          list.add("A");
+7.          list.add("B");
+8.          list.add("C");
+9.          for (String str: list) {
+10.             if ("B".equals(str)) {
+11.                 list.remove(str);
+12.             } else {
+13.                 System.out.println(str);
+14.             }
+15.         }
+16.     }
+17. }
+`},
+
+],
+    options: `A. 「A」「C」と表示される
+B. 「A」「B」「C」と表示される
+C. 「A」と表示される
+D. コンパイルエラーが発生する
+E. 実行時に例外がスローされる
+`,
+    answer: "C",
+    explanation: ""
+},
+{
+    id: 13,
+    chapter: "ch09",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1.  import java.util.ArrayList;
+2.
+3.  public class Main {
+4.      public static void main(String[] args) {
+5.          ArrayList<String> list = new ArrayList<>();
+6.          list.add("A");
+7.          list.add("B");
+8.          list.add("C");
+9.          list.add("D");
+10.         list.add("E");
+11.         for (String str: list) {
+12.             if ("C".equals(str)) {
+13.                 list.remove(str);
+14.             }
+15.         }
+16.         for (String str: list) {
+17.             System.out.println(str);
+18.         }
+19.     }
+20. }
+`},
+],
+    options: `A. 「A」「B」「D」「E」と表示される
+B. 「A」「B」「C」「D」「E」と表示される
+C. 「A」「B」「E」と表示される
+D. コンパイルエラーが発生する
+E. 実行時に例外がスローされる
+`,
+    answer: "E",
+    explanation: ""
+},
+{
+    id: 14,
+    chapter: "ch09",
+    contents:[
+        { type: "text", value: "次のうち、値を変更できないか、固定長のリストを作るものを選びなさい。(2つ選択)" },
+        ],
+    options: `A. var list = List. of(1,2,3);
+B. var list = new ArrayList<Integer>();
+C. var list = Arrays.asList(new Integer() {1,2,3});
+D. var list = new ArrayList<Integer>(3);
+`,
+    answer: "A、C",
+    explanation: ""
+},
+{
+    id: 15,
+    chapter: "ch09",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1. import java.util.Arrays;
+2.
+3. public class Main {
+4.     public static void main(String[] args) {
+5.         String[ ] a = {"b", "c"};
+6.         String[ ] b = {"a", "b", "c"};
+7.         System.out.println(Arrays.mismatch(a, b));
+8.     }
+9. }
+`},
+],
+    options: `A. falseが表示される
+B. trueが表示される
+C. -1が表示される
+D. 0が表示される
+E. 1が表示される
+`,
+    answer: "D",
+    explanation: ""
+},
+{
+    id: 16,
+    chapter: "ch09",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1. import java.util.Arrays;
+2.
+3. public class Main {
+4.     public static void main(String[] args) {
+5.         String[] a = {"B", "A"};
+6.         String[] b = {"A", "B"};
+7.         System.out.println(Arrays.compare(a, b));
+8.     }
+9. }
+`},
+],
+    options: `A. trueが表示される
+B. falseが表示される
+C. 1が表示される
+D. 0が表示される
+E. -1が表示される
+`,
+    answer: "C",
+    explanation: ""
+},
+{
+    id: 17,
+    chapter: "ch09",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1.  import java.util.ArrayList;
+2.  import java.util.Arrays;
+3.  import java.util.List;
+4.
+5.  public class Main {
+6.      public static void main(String[] args) {
+7.          List<String> list = new ArrayList<>(
+8.              Arrays.asList(new String[]{"A", "B", "C"})
+9.          );
+10.         list.removeIf(
+11.             (String s) -> {
+12.                 return s.equals("B");
+13.             }
+14.         );
+15.         System.out.println(list);
+16.     }
+17. }
+`},
+],
+    options: `A. [A, B, C]
+B. [A, C]
+C. コンパイルエラーが発生する
+D. 実行時に例外がスローされる
+`,
+    answer: "B",
+    explanation: ""
+},
+{
+    id: 18,
+    chapter: "ch09",
+    contents:[
+        { type: "text", value: "次のプログラムの実行結果として「A」 「B」 「C」 と順に表示したい。以下の空欄に入るコードとして正しいものを選びなさい。(2つ選択)" },
+        { 
+            type: "code", 
+            value: `1. import java.util.List;
+2.
+3. public class Main {
+4.     public static void main(String[] args) {
+5.         List<String> list = List.of("A", "B", "C");
+6.         □□□□□□□
+7.     }
+8. }
+`},
+],
+    options: `A. list.forEach(str -> System.out.println(str));
+B. list.for(str -> System.out.println(str));
+C. list.forEach(System.out::println);
+D. list.forEach(System.out::println());
+E. list.for(System.out::println);
+`,
+    answer: "A、C",
+    explanation: ""
+},
+{
+    id: 19,
+    chapter: "ch09",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイルし、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1.  public class Item {
+2.      private int id;
+3.      private String name;
+4.      public Item(int id, String name) {
+5.          this.id = id;
+6.          this.name = name;
+7.      }
+8.      public int getId() {
+9.          return id;
+10.     }
+11.     public String getName() {
+12.         return name;
+13.     }
+14. }
+`},
+{ 
+            type: "code", 
+            value: `1.  import java.util.HashMap;
+2.  import java.util.Map;
+3.
+4.  public class Sample {
+5.      public static void main(String[] args) {
+6.          Map<Integer, Iten> map = new HashMap<Integer, Item>();
+7.          map.put(1, new Item(1, "A"));
+8.          map.put(2. new Item(2. "B"));
+9.          map.put(3, new Item(3, "C"));
+10.         map.put(1, new Item(1, "A"));
+11.         map.put(null, new Item(0, "default"));
+12.
+13.         System.out.println(map.size());
+14.     }
+15. }
+`},
+],
+    options: `A. 3が表示される
+B. 4が表示される
+C. 5が表示される
+D. コンパイルエラーが発生する
+E. 実行時に例外がスローされる
+`,
+    answer: "B",
+    explanation: ""
+},
+{
+    id: 1,
+    chapter: "ch10",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1.  public class Main {
+2.      public static void main(String[] args) {
+3.          try {
+4.              int[] array = { };
+5.              array[0] = 10;
+6.              System.out.println("finish");
+7.          } catch (ArrayIndexOutOfBoundsException e) {
+8.              System.out.println("error");
+9.          }
+10.     }
+11. }
+`},
+],
+    options: `A. 「finish」と表示される
+B. 「error」と表示される
+C. 「finish」「error」と表示される
+D. 「error」「finish」 と表示される
+E. コンパイルエラーが発生する
+F. 実行時に例外がスローされる
+`,
+    answer: "B",
+    explanation: ""
+},
+{
+    id: 2,
+    chapter: "ch10",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。なお、実行時には起動パラメータを何も渡さないこととする。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1.  public class Main {
+2.      public static void main(String[] args) {
+3.          try {
+4.              if (args.length == 0) {
+5.                  System.out.println("A");
+6.              }
+7.          } catch (NullPointerException e) {
+8.              System.out.println("B");
+9.          } finally {
+10.             System.out.println("C");
+11.         }
+12.     }
+13. }
+`},
+],
+    options: `A. 「A」「B」「C」と表示される
+B. 「A」「C」と表示される
+C. 「B」「C」と表示される
+D. 「A」「B」と表示される
+E. コンパイルエラーが発生する
+F. 実行時に例外がスローされる
+`,
+    answer: "B",
+    explanation: ""
+},
+{
+    id: 3,
+    chapter: "ch10",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1. public class SampleException extends Exception { }
+`},
+{ 
+            type: "code", 
+            value: `1. public class SubSampleException extends SampleException { }
+`},
+{ 
+            type: "code", 
+            value: `1.  public class Main {
+2.      public static void main(String[] args) {
+3.          try {
+4.              sample();
+5.              sub();
+6.          } catch (SampleException e) {
+7.              System.out.println("A");
+8.          } catch (SubSampleException e) {
+9.              System.out.println("B");
+10.         }
+11.     }
+12.
+13.     private static void sample() throws SampleException {
+14.         throw new SampleException();
+15.     }
+16.
+17.     private static void sub() throws SubSampleException {
+18.         throw new SubSampleException();
+19.     }
+20.
+21. }
+`},
+
+],
+    options: `A. 「A」と表示される
+B. 「B」と表示される
+C. 「B」「A」と表示される
+D. 何も表示されない
+E. コンパイルエラーが発生する
+F. 実行時に例外がスローされる
+`,
+    answer: "E",
+    explanation: ""
+},
+{
+    id: 4,
+    chapter: "ch10",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1.  public class Main {
+2.      public static void main(String[] args) {
+3.          try {
+4.              Object obj = null;
+5.              System.out.println(obj.toString());
+6.              System.out.println("A");
+7.          } finally {
+8.              System.out.println("B");
+9.          } catch (NullPointerException e) {
+10.             System.out.println("C");
+11.         }
+12.     }
+13. }
+`},
+],
+    options: `A. 「B」「C」と表示される
+B. 「C」「B」と表示される
+C. 「A」「C」と表示される
+D. コンパイルエラーが発生する
+E. 実行時に例外がスローされる
+`,
+    answer: "D",
+    explanation: ""
+},
+{
+    id: 5,
+    chapter: "ch10",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1.  public class Main {
+2.      public static void main(String[] args) {
+3.          System.out.println(test(null));
+4.      }
+5.      private static String test(Object obj) {
+6.          try {
+7.              System.out.println(obj.toString());
+8.          } catch (NullPointerException e) {
+9.              return "A";
+10.         } finally {
+11.             System.out.println("B");
+12.         }
+13.         return "C";
+14.     }
+15. }
+`},
+],
+    options: `A. 「A」と表示される
+B. 「A」「B」と表示される
+C. 「B」「A」と表示される
+D. 「C」と表示される
+E. コンパイルエラーが発生する
+F. 実行時に例外がスローされる
+`,
+    answer: "C",
+    explanation: ""
+},
+{
+    id: 6,
+    chapter: "ch10",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1.  public class Main {
+2.      public static void main(String[] args) {
+3.          int result = sample();
+4.          System.out.println(result);
+5.      }
+6.      private static int sample() {
+7.          try {
+8.              throw new RuntimeException();
+9.          } catch (RuntimeException e) {
+10.             return 10;
+11.         } finally {
+12.             return 20;
+13.         }
+14.     }
+15. } 
+`},
+],
+    options: `A. 10が表示される
+B. 20が表示される
+C. 30が表示される
+D. コンパイルエラーが発生する
+E. 実行時に例外がスローされる
+`,
+    answer: "B",
+    explanation: ""
+},
+{
+    id: 7,
+    chapter: "ch10",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1.  public class Main {
+2.      public static void main(String[] args) {
+3.          int result = sample();
+4.          System.out.println(result);
+5.      }
+6.      private static int sample() {
+7.          int val = 0;
+8.          try {
+9.              String[ ] array = {"A", "B", "C"};
+10.             System.out.println(array[3]);
+11.         } catch (RuntimeException e) {
+12.             val = 10;
+13.             return val;
+14.         } finally {
+15.             val += 10;
+16.         }
+17.         return val;
+18.     }
+19. }
+`},
+],
+    options: `A. 0が表示される
+B. 10が表示される
+C. 20が表示される
+D. コンパイルエラーが発生する
+E. 実行時に例外がスローされる
+`,
+    answer: "B",
+    explanation: ""
+},
+{
+    id: 8,
+    chapter: "ch10",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1.  public class Main {
+2.      public static void main(String[] args) {
+3.          try {
+4.              System.out.println("A");
+5.          } finally {
+6.              System.out.println("B");
+7.          } finally {
+8.              System.out.println("C");
+9.          }
+10.     } 
+11. }
+`},
+],
+    options: `A. 「A」「B」「C」と表示される
+B. 「A」「B」と表示される
+C. 「A」「C」と表示される
+D. コンパイルエラーが発生する
+E. 実行時に例外がスローされる
+`,
+    answer: "D",
+    explanation: ""
+},
+{
+    id: 9,
+    chapter: "ch10",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1.  public class Main {
+2.      public static void main(String[] args) {
+3.          try {
+4.              try {
+5.                  String[] array = {"A", "B", "C"};
+6.                  System.out.println(array[3]);
+7.              } catch (ArrayIndexOutOfBoundsException e) {
+8.                  System.out.println("D");
+9.              } finally {
+10.                 System.out.println("E");
+11.             }
+12.         } catch (ArrayIndexOutOfBoundsException e) {
+13.             System.out.println("F");
+14.         } finally {
+15.             System.out.println("G");
+16.         }
+17.     }
+18. }
+`},
+],
+    options: `A. 「C」「E」「G」と表示される
+B. 「D」「E」「G」と表示される
+C. 「E」「F」「G」と表示される
+D. 「D」「E」と表示される
+E. 「F」「G」と表示される
+F. コンパイルエラーが発生する
+G. 実行時に例外がスローされる
+`,
+    answer: "B",
+    explanation: ""
+},
+{
+    id: 10,
+    chapter: "ch10",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイルし、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1.  import java.io.FileInputStream;
+2.  import java.io.FileNotFoundException;
+3.
+4.  public class Sample {
+5.      public static void main(String[] args) {
+6.          try (FileInputStream is new FileInputStream("sample.txt")) {
+7.              throw new FileNotFoundException();
+8.          } catch (Exception e) {
+9.              System.out.println("A");
+10.         } finally {
+11.             if (is != null) {
+12.                 is.close();
+13.             }
+14.             System.out.println("B");
+15.         }
+16.     }
+17. }
+`},
+],
+    options: `A. 「A」と表示される
+B. 「B」と表示される
+C. 「A」「B」と表示される
+D. 「B」「A」と表示される
+E. コンパイルエラーが発生する
+`,
+    answer: "E",
+    explanation: ""
+},
+{
+    id: 11,
+    chapter: "ch10",
+    contents:[
+        { type: "text", value: "次のSampleクラスの2行目の空欄に入るコードとして、正しいものを選びなさい。(2つ選択)" },
+        { 
+            type: "code", 
+            value: `1. public class SampleException extends Exception { }
+`},
+{ 
+            type: "code", 
+            value: `1. public class TestException extends RuntimeException { }
+
+`},
+{ 
+            type: "code", 
+            value: `1.  public class Sample {
+2.      public void hello(String name) □□□□□□□ {
+3.          if (name == null) {
+4.              throw new SampleException();
+5.          }
+6.          if ("".equals(name)){
+7.              throw new TestException();
+8.          }
+9.          // do something
+10.     }
+11. }
+`},
+
+],
+    options: `A. throws SampleException, TestException
+B. throws SampleException; TestException
+C. throws TestException
+D. throws SampleException
+E. 何も記述しなくてもよい
+`,
+    answer: "A、D",
+    explanation: ""
+},
+{
+    id: 12,
+    chapter: "ch10",
+    contents:[
+        { type: "text", value: "エラーに関する説明として、誤っているものを選びなさい。(1つ選択)" },
+        ],
+    options: `A. エラーは、プログラムの実行環境に例外が発生したときにスローされる
+B. エラーは、Errorクラスを継承しなければいけない
+C. エラーはthrows句に宣言する必要はない
+D. エラーは例外処理を記述できない
+`,
+    answer: "D",
+    explanation: ""
+},
+{
+    id: 13,
+    chapter: "ch10",
+    contents:[
+        { type: "text", value: "次のプログラムを確認してください。" },
+        { 
+            type: "code", 
+            value: `1. public class Main {
+2.     public static void main(String[] args) {
+3.         System.out.println(args[0].length());
+4.     }
+5. }
+`},
+{ type: "text", value: "このプログラムを次のコマンドで実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+{ 
+            type: "code", 
+            value: `> java Main
+`},
+],
+    options: `A. 「null」と表示される
+B. 「0」と表示される
+C. ArrayIndexOutOfBoundsExceptionが発生する
+D. NullPointerExceptionが発生する
+`,
+    answer: "C",
+    explanation: ""
+},
+{
+    id: 14,
+    chapter: "ch10",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行したときに発生する例外の種類として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1. import java.util.ArrayList;
+2. import java.util.List;
+3.
+4. public class Main {
+5.     public static void main(String[] args) {
+6.         List<String> list = new ArrayList<>();
+7.         list.get(0);
+8.     }
+9. }
+`},
+],
+    options: `A. IndexOutOfBoundsException
+B. ArrayIndexOutOfBoundsException
+C. StringIndexOutOfBoundsException
+D. ListindexOutOfBoundsException
+`,
+    answer: "A",
+    explanation: ""
+},
+{
+    id: 15,
+    chapter: "ch10",
+    contents:[
+        { type: "text", value: "次のプログラムを確認してください。" },
+        { 
+            type: "code", 
+            value: `1. public class A {
+2.     private int num;
+3.     public A(int num) {
+4.         this.num = num;
+5.     }
+6.     public boolean equals(Object obj) {
+7.         A a = (A) obj;
+8.         return this.num == a.num;
+9.     }
+10. }
+`},
+{ 
+            type: "code", 
+            value: `1. public class B {
+2.     private int num;
+3.     public B(int num) {
+4.         this.num = num;
+5.     }
+6.     public boolean equals(Object obj) {
+7.         B b = (B) obj;
+8.         return this.num == b.num;
+9.     }
+10. }
+`},
+{ type: "text", value: "これらのクラスを利用する以下のプログラムを、コンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1. public class Main {
+2.     public static void main(String[] args) {
+3.         A a = new A(10);
+4.         B b = new B(10);
+5.         System.out.println(a.equals(b));
+6.     }
+7. }
+`},
+],
+    options: `A. trueが表示される
+B. falseが表示される
+C. コンパイルエラーが発生する
+D. 実行時に例外がスローされる
+`,
+    answer: "D",
+    explanation: ""
+},
+{
+    id: 16,
+    chapter: "ch10",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1. public class Main {
+2.     public static void main(String[] args) {
+3.         String str = null;
+4.         if (str.equals("")) {
+5.             System.out.println("blank");
+6.         } else {
+7.             System.out.println("null");
+8.         }
+9.     }
+10. }
+`},
+
+],
+    options: `A. 「blank」と表示される
+B. 「null」と表示される
+C. IllegalArgumentExceptionが発生する
+D. NullPointerExceptionが発生する
+`,
+    answer: "D",
+    explanation: ""
+},
+{
+    id: 17,
+    chapter: "ch10",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1. public class Main {
+2.     public static void main(String[] args) {
+3.         main(args);
+4.     }
+5. }
+`},
+
+],
+    options: `A. 何も表示されない
+B. StackOverflowErrorが発生する
+C. IllegalStateExceptionが発生する
+D. Exceptionininitializer Errorが発生する
+`,
+    answer: "B",
+    explanation: ""
+},
+{
+    id: 1,
+    chapter: "ch11",
+    contents:[
+        { type: "text", value: "次の説明のうち、正しいものを選びなさい。(2つ選択)" },
+        
+],
+    options: `A. モジュールの設定は、module-info.javaに記述する
+B. モジュールの設定では、どのパッケージを公開するかを記述する
+C. モジュールの設定では、どのパッケージを利用するかを記述する
+D. module-info.javaがなくてもモジュール化することができる
+`,
+    answer: "A、B",
+    explanation: ""
+},
+{
+    id: 2,
+    chapter: "ch11",
+    contents:[
+        { type: "text", value: "libディレクトリにあるsampleモジュールを実行したい。エントリーポイントを持つクラスをcom.test. Helloとしたときのコマンドとして正しいものを選びなさい。(1つ選択)" },
+        ],
+    options: `A. java -m lib sample/com.test.Hello
+B. java --module-path lib com.test.Hello
+C. java --module-path lib -m com.test.Hello
+D. java --module-path lib -m sample/com.test.Hello
+E. java --module-path lib -m sample.com.test.Hello
+`,
+    answer: "D",
+    explanation: ""
+},
+{
+    id: 3,
+    chapter: "ch11",
+    contents:[
+        { type: "text", value: "sampleモジュールは、com.sampleパッケージを公開し、testモジュールを利用している。module-info.javaの設定として、正しいものを選びなさい。(1つ選択)" },
+        ],
+    options: `A. module sample {
+　     exports test;
+　     requires com.sample;
+　 }
+B. module sample {
+　     export com.sample;
+　     require test;
+　 }
+C. module sample {
+　     requires com.sample;
+　     requires test;
+　 }
+D. module sample {
+　     exports com.sample;
+　     requires test;
+　 }
+`,
+    answer: "D",
+    explanation: ""
+},
+{
+    id: 4,
+    chapter: "ch11",
+    contents:[
+        { type: "text", value: "次の図のようなモジュールグラフがあったとき、module1 でmodule3 に属するパッケージのクラスを利用する際の説明として正しいものを選びなさい。(1つ選択)" },
+        { type: "image",
+          src: "Image/11_4.png",
+          alt: "11章4問目の図"
+        },
+    ],
+    options: `A. module1@module-info.javaで、module2をrequiresで宣言する
+B. module1@module-info.javaで、module2をrequires transitiveで宣言する
+C. module2のmodule-info.javaで、module3をrequiresで宣言する
+D. module2@module-info.javaで、module3をrequires transitiveで宣言する
+`,
+    answer: "D",
+    explanation: ""
+},
+{
+    id: 5,
+    chapter: "ch11",
+    contents:[
+        { type: "text", value: "あらかじめ用意されているモジュールのうち、標準で組み込まれるモジュールとして、正しいものを選びなさい。(1つ選択)" },
+
+    ],
+    options: `A. java.lang
+B. java.base
+C. jdk.lang
+D. jdk.base
+`,
+    answer: "B",
+    explanation: ""
+},
+{
+    id: 6,
+    chapter: "ch11",
+    contents:[
+        { type: "text", value: "module-info.javaに設定したモジュールの設定情報を調べるためのコマンドとして、正しいものを選びなさい。(2つ選択)" },
+    ],
+    options: `A. java --describe-module
+B. jdeps --list-deps
+C. jmod describe
+D. java --show-module-resolution
+`,
+    answer: "A、C",
+    explanation: ""
+},
+{
+    id: 7,
+    chapter: "ch11",
+    contents:[
+        { type: "text", value: "module-info.javaでexportsされていないパッケージを、一時的に利用してコンパイルしたい。javacコマンドのオプションとして正しいものを選びなさい。(1つ選択)" },
+    ],
+    options: `A. --add-exports
+B. --exports
+C. -add
+D. --add-modules
+`,
+    answer: "A",
+    explanation: ""
+},
+{
+    id: 1,
+    chapter: "ch12",
+    contents:[
+        { type: "text", value: "次の2つのコードのクラスファイルを生成するためのコマンドとして、 正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1. package b;
+2.
+3. public class B {
+4.
+5. }
+`},
+{ 
+            type: "code", 
+            value: `1. package a;
+2. import b.B;
+3.
+4. public class A {
+5.     public static void main(String[] args) {
+6.         B b = new B();
+7.     }
+8. }
+`},
+    ],
+    options: `A. java a/A.java
+B. java b/B.java
+C. javac b/B.java
+　 java a/A.java
+D. javac a/A.java
+　 java a/A
+`,
+    answer: "D",
+    explanation: ""
+},
+{
+    id: 2,
+    chapter: "ch12",
+    contents:[
+        { type: "text", value: "次の3つのステートメントを記述する順番として正しいものを選びなさい。(1つ選択)" },
+        
+    ],
+    options: `A. package　   import　   class
+B. package　   class　    import
+C. import　　  class　    package
+D. class　　   package　  import
+E. import　    package　  class
 `,
     answer: "A",
     explanation: ""

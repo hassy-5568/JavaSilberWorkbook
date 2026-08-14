@@ -9,6 +9,7 @@ const chapterTitles = {
     "ch05": "5章 配列の操作",
     "ch06": "6章 インスタントとメソッド",
     "ch07": "7章 クラスの継承、インタフェース、抽象クラス",
+    "ch08": "8章 関数型インターフェース、ラムダ式",
    
 };
 
@@ -3037,6 +3038,609 @@ F. 実行時に例外がスローされる
     answer: "A",
     explanation: ""
 },
-
+{
+    id: 10,
+    chapter: "ch07",
+    contents: [
+        { type: "text", value: "オーバーライドに関する説明として、正しいものを選びなさい。(1つ選択)" },
+],
+    options: `A. 引数リストの定義は、型、数、順番のすべてが同じでなければいけない
+B. 戻り値型は同じでなければいけない
+C. 抽象メソッドはオーバーライドできない
+D. オーバーロードされたメソッドはオーバーライドできない
+`,
+    answer: "A",
+    explanation: ""
+},
+{
+    id: 11,
+    chapter: "ch07",
+    contents:[
+        { type: "text", value: "以下のクラスを継承したサブクラスを定義するとき、helloメソッドをオーバーライドしようとしている。サブクラスに定義するhelloメソッドに付けられるアクセス修飾子として、正しいものを選びなさい。(1 つ選択)" },
+        { 
+            type: "code", 
+            value: `1. public class Sample {
+2.     protected void hello() {
+3.         System.out.println("hello.");
+4.     }
+5. }
+`},],
+    options: `A. デフォルト(アクセス修飾子なし)
+B. private
+C. public
+D. アクセス修飾子は変えられない`,
+    answer: "C",
+    explanation: ""
+},
+{
+    id: 12,
+    chapter: "ch07",
+    contents:[
+        { type: "text", value: "次のプログラムを確認してください。" },
+        { 
+            type: "code", 
+            value: `1.  class A {
+2.      String val = "A";
+3.      void print() {
+4.          System.out.print(val);
+5.      }
+6.  }
+7.
+8.  class B extends A {
+9.      String val = "B";
+10. }
+`},
+{ type: "text", value: "これらのクラスを利用する以下のプログラムを、コンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+{ 
+            type: "code", 
+            value: `1.  public class Main {
+2.      public static void main(String[] args) {
+3.          A a = new A();
+4.          A b = new B();
+5.          System.out.print(a.val);
+6.          System.out.print(b.val);
+7.          a.print();
+8.          b.print();
+9.      }
+10. }
+`}
+],
+    options: `A. 「ABAB」と表示される
+B. 「AAAA」と表示される
+C. 「AAAB」と表示される
+D. Bクラスでコンパイルエラーが発生する
+E. Mainクラスでコンパイルエラーが発生する
+F. 実行時に例外がスローされる
+`,
+    answer: "B",
+    explanation: ""
+},
+{
+    id: 13,
+    chapter: "ch07",
+    contents:[
+        { type: "text", value: "次のプログラムを確認してください。" },
+        { 
+            type: "code", 
+            value: `1. interface Worker {
+2.     void work();
+3. }
+4.
+5. class Employee {
+6.     public void work() {
+7.         System.out.println("work");
+8.     }
+9. }
+`},
+{ 
+            type: "code", 
+            value: `class Engineer extends Employee implements Worker { }`},
+{ type: "text", value: "これらのクラスを利用する以下のプログラムを、コンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+{ 
+            type: "code", 
+            value: `1. public class Main {
+2.     public static void main(String[] args) {
+3.         Worker worker new Engineer();
+4.         worker.work();
+5.     }
+6. }
+`}
+],
+    options: `A. Engineerクラスでコンパイルエラーが発生する
+B. Mainクラスでコンパイルエラーが発生する
+C. 「work」と表示される
+D. 実行時に例外がスローされる
+`,
+    answer: "C",
+    explanation: ""
+},
+{
+    id: 14,
+    chapter: "ch07",
+    contents:[
+        { type: "text", value: "次のプログラムを確認し、これらのクラスとインタフェースを利用する Mainクラスをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1. public interface Worker {
+2.     void work();
+3. }
+`},
+{ 
+            type: "code", 
+            value: `1. class Employee implements Worker {
+2.     public void work() {
+3.         System.out.println("work");
+4.     }
+5.     public void report() {
+6.          System.out.println("report");
+7.     }
+8. }
+`},
+{ 
+            type: "code", 
+            value: `1. class Engineer extends Employee {
+2.     public void create() {
+3.         System.out.println("create future");
+4.     }
+5. }
+`},
+{ 
+            type: "code", 
+            value: `1. public class Main {
+2.     public static void main(String[] args) {
+3.         Worker a = new Engineer();
+4.         Employee b = new Engineer();
+5.         Engineer c = new Engineer();
+6.         a. create();
+7.         b.work();
+8.         c. report();
+9.     }
+10. }
+`},
+],
+    options: `A. Mainクラスの6行目でコンパイルエラーが発生する
+B. Mainクラスの7行目でコンパイルエラーが発生する
+C. Mainクラスの8行目でコンパイルエラーが発生する
+D. 選択肢AとBの両方
+E. 選択肢とCの両方
+`,
+    answer: "A",
+    explanation: ""
+},
+{
+    id: 15,
+    chapter: "ch07",
+    contents:[
+        { type: "text", value: "次のプログラムを確認してください。" },
+        { 
+            type: "code", 
+            value: `1. public interface A{ }
+`},
+{ 
+            type: "code", 
+            value: `1. public class B implements A{ }
+`},
+{ 
+            type: "code", 
+            value: `1. public class C extends B{ }
+`},
+{ 
+            type: "code", 
+            value: `public class D {}
+`},
+{ type: "text", value: "これらのクラスやインタフェースを利用する以下のプログラムを、コンバイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+{ 
+            type: "code", 
+            value: `1. public class Main {
+2.     public static void main(String[] args) {
+3.         A[] array = {
+4.             new B(),
+5.             new C(),
+6.             new A(),
+7.             пеw D()
+8.         };
+9.     }
+10. }
+`},
+],
+    options: `A. 4行目でコンパイルエラーが発生する
+B. 5行目でコンパイルエラーが発生する
+C. 6行目でコンパイルエラーが発生する
+D. 7行目でコンパイルエラーが発生する
+E. 選択肢AとBの両方
+F. 選択肢CとDの両方
+G. 選択肢BとCの両方
+H. 正常に動作する
+`,
+    answer: "F",
+    explanation: ""
+},
+{
+    id: 16,
+    chapter: "ch07",
+    contents:[
+        { type: "text", value: "次のプログラムを確認してください。" },
+        { 
+            type: "code", 
+            value: `1. class A { }
+`},
+{ 
+            type: "code", 
+            value: `1. class B extends A {
+2.     void hello() {
+3.         System.out.println("hello");
+4.     }
+5. }
+`},
+{ type: "text", value: "これらのクラスを利用する以下のプログラムを実行し、「hello」とコンソールに表示したい。4行目の空欄に入るコードとして、正しいものを選びなさい。(1つ選択)" },
+{ 
+            type: "code", 
+            value: `1. public class Main {
+2.     public static void main(String[] args) {
+3.         A a = new B();
+4.         □□□□□□□
+5.         b.hello();
+6.     }
+7. }
+`},
+],
+    options: `A. A b = a;
+B. A b = new B();
+C. A b = (A) a;
+D. B b = a;
+E. B b = (A) a;
+F. B b = (B) a;
+`,
+    answer: "F",
+    explanation: ""
+},
+{
+    id: 17,
+    chapter: "ch07",
+    contents:[
+        { type: "text", value: "次のプログラムを確認してください。" },
+        { 
+            type: "code", 
+            value: `1. class A {
+2.     void hello() {
+3.         System.out.println("A");
+4.     }
+5. }
+`},
+{ 
+            type: "code", 
+            value: `1. class B extends A {
+2.     void hello() {
+3.         System.out.println("B");
+4.     }
+5. }
+`},
+{ type: "text", value: "これらのクラスを利用する以下のプログラムを、コンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+{ 
+            type: "code", 
+            value: `1. public class Main {
+2.     public static void main(String[] args) {
+3.         A a = new A();
+4.         B b = (B) a;
+5.         b.hello();
+6.     }
+7. }
+`},
+],
+    options: `A. Aが表示される
+B. Bが表示される
+C. Mainクラスでコンパイルエラーが発生する
+D. 実行時に例外がスローされる
+`,
+    answer: "D",
+    explanation: ""
+},
+{
+    id: 18,
+    chapter: "ch07",
+    contents:[
+        { type: "text", value: "次のプログラムを確認してください。コンソールに 「10」と表示するために、Sampleクラスの4行目の空欄に入るコードとして正しいものを選びなさい。(2つ選択)" },
+        { 
+            type: "code", 
+            value: `1.  class Sample {
+2.      private int num;
+3.      public Sample(int num) {
+4.          □□□□□□□
+5.      }
+6.      public int getNum() {
+7.          return num;
+8.      }
+9.      public void setNum(int num) {
+10.         this.num = num;
+11.     }
+12. }
+`},
+{ 
+            type: "code", 
+            value: `1. public class Main {
+2.     public static void main(String[] args) {
+3.         Sample s = new Sample (10):
+4.         System.out.println(s.getNum());
+5.     }
+6. }
+`},
+],
+    options: `A. this.num num;
+B. this -> num = num;
+C. num = num;
+D. setNum(num);
+E. super.setNum(num);
+`,
+    answer: "A、D",
+    explanation: ""
+},
+{
+    id: 19,
+    chapter: "ch07",
+    contents:[
+        { type: "text", value: "次のプログラムを確認してください。" },
+        { 
+            type: "code", 
+            value: `1. class Parent {
+2.     String name;
+3.     String getName() {
+4.         return this.name;
+5.     }
+6. }
+`},
+{ 
+            type: "code", 
+            value: `1. public class Child extends Parent {
+2.     String name;
+3. }
+`},
+{ type: "text", value: "これらのクラスを利用する以下のプログラムを、コンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+{ 
+            type: "code", 
+            value: `1. public class Main {
+2.     public static void main(String[] args) {
+3.         Child child = new Child();
+4.         child.name = "sample";
+5.         System.out.println(child.getName());
+6.     }
+7. }
+`},
+],
+    options: `A. 「sample」と表示される
+B. 「null」と表示される
+C. 何も表示されない
+D. コンパイルエラーが発生する
+E. 実行時に例外がスローされる
+`,
+    answer: "B",
+    explanation: ""
+},
+{
+    id: 20,
+    chapter: "ch07",
+    contents:[
+        { type: "text", value: "次のプログラムを確認してください。" },
+        { 
+            type: "code", 
+            value: `1. class A {
+2.     public A() {
+3.         System.out.println("A");
+4.     }
+5. }
+`},
+{ 
+            type: "code", 
+            value: `1. class B extends A {
+2.     public B() {
+3.         System.out.println("B");
+4.     }
+5. }
+`},
+{ type: "text", value: "これらのクラスを利用する以下のプログラムを、コンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+{ 
+            type: "code", 
+            value: `1. public class Main {
+2.     public static void main(String[] args) {
+3.          A a = new B();
+4.     }
+5. }
+`},
+],
+    options: `A. 「A」と表示される
+B. 「B」と表示される
+C. 「A」「B」と表示される
+D. 「B」「A」と表示される
+E. コンパイルエラーが発生する
+F. 実行時に例外がスローされる
+`,
+    answer: "A",
+    explanation: ""
+},
+{
+    id: 1,
+    chapter: "ch08",
+    contents:[
+        { type: "text", value: "次のプログラムを確認し、Mainクラスの空欄に入るコードとして、正しいものを選びなさい。(2つ選択)" },
+        { 
+            type: "code", 
+            value: `1. interface Algorithm {
+2.     void perform(String name);
+3. }
+`},
+{ 
+            type: "code", 
+            value: `1.  class Service {
+2.      private Algorithm logic;
+3.      public void setLogic(Algorithm logic) {
+4.          this.logic = logic;
+5.      }
+6.      public void doProcess (String name) {
+7.          System.out.println("start");
+8.          this.logic.perform(name);
+9.          System.out.println("end");
+10.     }
+11. }
+`},
+{ 
+            type: "code", 
+            value: `1. public class Main {
+2.     public static void main(String[] args) {
+3.         Algorithm algorithm = □□□□□□□ -> {
+4.             System.out.println("hello," + name);
+5.         }
+6.     Service s = new Service();
+7.     s.setLogic(algorithm);
+8.     s.doProcess("Lambda");
+9.     }
+10. }
+`},
+],
+    options: `A. ()
+B. (name)
+C. (String)
+D. (String name)
+`,
+    answer: "B、D",
+    explanation: ""
+},
+{
+    id: 2,
+    chapter: "ch08",
+    contents:[
+        { type: "text", value: "次のプログラムの 「// insert code here」 に入るコードとして、誤っているものを選びなさい。(2つ選択)" },
+        { 
+            type: "code", 
+            value: `1. public class Main {
+2.     public static void main(String[] args) {
+3.         // insert code here
+4.     System.out.println(f.test("Lambda"));
+5.     }
+6.     private static interface Function {
+7.         String test(String name);
+8.     }
+9. }
+`},
+],
+    options: `A. Function f = (name) -> 
+　     return "hello," + name;
+　 };
+B. Function f = (name) -> {
+　     "hello, " + name;
+　 };
+C. Function f = (name) -> return "hello, " + name;
+D. Function f = (name) -> "hello, " + name;
+E. Function f = name -> {
+　     return "hello, " + name;
+　  };
+`,
+    answer: "B、C",
+    explanation: ""
+},
+{
+    id: 3,
+    chapter: "ch08",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1.  public class Main {
+2.      public static void main(String[] args) {
+3.          String val = "A";
+4.          Function f = (val) -> {
+5.              System.out.println(val);
+6.          };
+7.          f.test("B");
+8.      }
+9. }
+10. interface Function {
+11.     void test(String val);
+12. }
+`},
+],
+    options: `A. Aが表示される
+B. Bが表示される
+C. コンパイルエラーが発生する
+D. 実行時に例外がスローされる
+`,
+    answer: "C",
+    explanation: ""
+},
+{
+    id: 4,
+    chapter: "ch08",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1.  public class Sample {
+2.      public static void main(String[] args) {
+3.          int cnt = 0;
+4.          Runnable r = () -> {
+5.              for (cnt = 0; cnt < 10; cnt++) {
+6.                  System.out.println(cnt++);
+7.              }
+8.          };
+9.      new Thread(r).start();
+10.     }
+11. }
+`},
+],
+    options: `A. A 0123456789が表示される
+B. 02468が表示される
+C. 13579が表示される
+D. コンパイルエラーが発生する
+E. 実行時に例外がスローされる
+`,
+    answer: "D",
+    explanation: ""
+},
+{
+    id: 5,
+    chapter: "ch08",
+    contents:[
+        { type: "text", value: "次のプログラムを実行し、「ok」と表示したい。11行目の空欄に入るコードとして、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1.  import java.util.Arrays;
+2.  import java.util.List;
+3.  import java.util.function.*;
+4.  
+5.  public class Main {
+6.      public static void main(String[] args) {
+7.          List<Sample> list = Arrays.asList(
+8.                              new Sample (10),
+9.                              new Sample (20),
+10.                             new Sample (30));
+11.         □□□□□□□□
+12.         if (x.test(new Sample(20))){
+13.             System.out.println("ok");
+14.         }
+15.     }
+16. }
+17. class Sample {
+18.     private int num;
+19.     public Sample(int num) {
+20.         this.num = num;
+21.     }
+22.     public boolean equals(Object obj) {
+23.         if (obj instanceof Sample == false) {
+24.             return false;
+25.         }
+26.         if (this.num == ((Sample) obj).num) {
+27.             return true;
+28.         }
+29.         return false;
+30.     }
+31. }
+`},
+],
+    options: `A. Predicate<Sample> x = s -> list.contains(s);
+B. Supplier<Sample> x = s -> list.contains(s);
+C. Consumer<Sample> x = s -> list.contains(s);
+D. Function<Sample> x = s -> list.contains(s);
+`,
+    answer: "A",
+    explanation: ""
+},
 
 ];

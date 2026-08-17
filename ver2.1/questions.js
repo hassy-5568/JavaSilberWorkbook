@@ -745,7 +745,7 @@ D. 43が表示される
 E. コンパイルエラーが発生する
 F. 実行時に例外がスローされる`,
         answer: "B",
-        explanation: ``
+        explanation: `内容を処理すると、10 + 11 + 11 - 10 + 10、になる。`
     },
     {
         id: 5,
@@ -864,7 +864,7 @@ D. 実行時に例外がスローされる`,
 11.         }
 12.         if (obj instanceof Sample) {
 13.             Sample s = (Sample) obj;
-14.             return s.nun == this.num;
+14.             return s.num == this.num;
 15.         }
 16.         return false;
 17.     }
@@ -876,9 +876,9 @@ D. 実行時に例外がスローされる`,
             type: "code", 
             value: `1. public class Main {
 2.     public static void main(String[] args) {
-3.     Sample a = new Sample(10, "a");
-4.     Sample b = new Sample(10, "b");
-5.     System.out.println(a.equals(b));
+3.         Sample a = new Sample(10, "a");
+4.         Sample b = new Sample(10, "b");
+5.         System.out.println(a.equals(b));
 6.     }
 7. }
 ` 
@@ -891,7 +891,9 @@ D. Mainクラスでコンパイルエラーが発生する
 E. 実行時に例外がスローされる
 `,
     answer: "A",
-    explanation: ""
+    explanation: `オブジェクト instanceof クラス名（またはインターフェース名）
+そのオブジェクトが特定のクラスのインスタンスかどうかを判定するメソッド。一致しない場合、nullの場合はfalseを返す。
+この問題では、Sampleクラスかどうかの判定をして、実行時エラーを防いでいる。`
 },
 {
     id: 10,
@@ -933,7 +935,12 @@ D. 「false」 と表示される
 E. 実行時に例外がスローされる
 `,
     answer: "D",
-    explanation: ""
+    explanation: `オーバーロードに関する問題。
+オーバーライド：親クラスのメソッドを上書きする。
+オーバーロード：同じ名前のメソッドを増やす（多重定義）。この際、引数の数や型が異なっている必要がある。
+public boolean equals(Sample obj) { にて、Sampleクラスのequalsメソッドを定義しているが、そもそもObjectにequalsメソッドが定義されているため、
+Object a 変数を使ってしまうと、Objectのequalsメソッドが呼び出される。
+`
 },
 {
         id: 11,
@@ -975,7 +982,7 @@ C. 「true, false」と表示される
 D. 「true, true」と表示される
 `,
         answer: "D",
-        explanation: ``
+        explanation: `Stringのインスタンスは、コンスタントプールという仕組みがある。同じ文字列の場合は、参照が使いまわされるため、同一である。`
     },
     {
         id: 13,
@@ -984,7 +991,7 @@ D. 「true, true」と表示される
         code: `1. public class Main {
 2.     public static void main(String[] args) {
 3.         String a = new String("sample");
-4.         String b = "sample":
+4.         String b = "sample";
 5.         System.out.print(a == b);
 6.         System.out.print(", ");
 7.         System.out.println(a.equals(b));
@@ -997,7 +1004,7 @@ C. 「true, false」と表示される
 D. 「true, true」と表示される
 `,
         answer: "A",
-        explanation: ``
+        explanation: `文字列リテラルは、コンスタントプールという仕組みがあるが、new演算子を使って、明示的に新しいインスタンスをつくる事にした場合は、異なるインスタンスとなる。== は同じインスタンスであるかどうかを判定する。文字列リテラルのequalsメソッドは、同じ文字列かどうかを判定している。`
     },
     {
         id: 14,
@@ -1010,13 +1017,13 @@ D. 「true, true」と表示される
 5.          String b = new String(a);
 6.
 7.          int count = 0;
-8.          if (a. intern() == "abc") {
+8.          if (a.intern( ) == "abc") {
 9.              count++;
 10.         }
-11.         if (b.intern() == "abc") {
+11.         if (b.intern( ) == "abc") {
 12.             count++;
 13.         }
-14.         if (a. intern() == b. intern()) {
+14.         if (a.intern( ) == b.intern( )) {
 15.             count++;
 16.         }
 17.         System.out.println(count);
@@ -1029,7 +1036,7 @@ C. 2が表示される
 D. 3が表示される
 `,
         answer: "D",
-        explanation: ``
+        explanation: `intern()メソッド。文字列プールの中に入っている文字列の内容を返す。`
     },
     {
         id: 15,
@@ -1178,7 +1185,13 @@ C. 10行目
 D. 12行目
 `,
         answer: "A、B",
-        explanation: ``
+        explanation: `Switch文のcase値に使える条件の問題。
+・条件式が戻す値と同じ型か、互換性がある。
+・定数か、コンパイル時に値が決められるか。
+・nullでないか
+6行目の case "10": は文字列リテラルを使っているため、コンパイルエラー。
+8行目は、変数のため、コンパイルエラー。
+`
     },
     {
         id: 21,
@@ -1475,7 +1488,7 @@ F. array : String[] array
         text: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)",
         code: `1.  public class Main {
 2.      public static void main(String[] args) {
-3.          String[] array("A", "B", "C");
+3.          String[] array = {"A", "B", "C"};
 4.          for (String str: array) {
 5.              str = "D";
 6.          }
@@ -1491,7 +1504,7 @@ C. コンパイルエラーが発生する
 D. 実行時に例外がスローされる
 `,
         answer: "B",
-        explanation: `拡張for文`
+        explanation: `拡張for文。変数strの値を変えているだけで、集合の値は変わらない。`
     },
     {
         id: 13,
@@ -1546,7 +1559,7 @@ System.out.println(num);
             },
         ],
         answer: "E",
-        explanation: ``
+        explanation: `この時のnumに入っている値は12。`
     },
     {
         id: 14,
@@ -1585,9 +1598,9 @@ E. 「BB」と表示される
 5.          for (int i: array) {
 6.              if (i % 2 == 0)
 7.                  continue;
-8.                  total += 1;
+8.                  total += i;
 9.          }
-10.     System.out.println(total);
+10.         System.out.println(total);
 11.     }
 12. }
 `,
@@ -1613,7 +1626,8 @@ E. tryブロック
 F. 選択肢A～Eすべて
 `,
         answer: "F",
-        explanation: ``
+        explanation: `ラベルとは、breakやcontinueのときなど、制御を戻す場所を指定する時に使う。
+コードブロック、if文、switch文、式、代入、return文、tryブロック、throw文などに使う。`
     },
     {
         id: 17,
@@ -1622,7 +1636,7 @@ F. 選択肢A～Eすべて
         code: `1.  public class Main {
 2.      public static void main(String[] args) {
 3.          int total = 0;
-4.          a: for (int i = 0; i < 5; 1++) {
+4.          a: for (int i = 0; i < 5; i++) {
 5.              b: for (int j = 0; j < 5; j++) {
 6.                  if (i % 2 == 0) continue a;
 7.                  if (3 < j) break b;
@@ -1794,7 +1808,10 @@ E. int e[ ];
 　 e = {2, 3};
    `,
         answer: "B、C、D",
-        explanation: ``
+        explanation: `A. 不可。new int[ ]{2,3}なら可。
+C. 可。int[] a や、int a[]の書き方はjavaは許容されている。
+D. 可。
+E. 不可。new int[] で明示すれば可。`
     },
     {
         id: 8,
@@ -1818,7 +1835,7 @@ D. コンパイルエラーが発生する
 E. 実行時に例外がスローされる
 `,
         answer: "E",
-        explanation: ``
+        explanation: `0[A,B]、1[null]、2[C,D,E]みたいな配列になっている。拡張for文で、変数tmpに代入されるのは、一次元目に格納されている、配列0、1、2。lengthで長さを取る時に、nullだと参照エラーがでる。`
     },
     {
         id: 9,
@@ -1842,7 +1859,12 @@ C. 実行時に例外がスローされる
 D. コンパイルも実行もできる
 `,
         answer: "D",
-        explanation: ""
+        explanation: `abstract。抽象クラス。これだけではインスタンス化(new B())できない、作成途中の未完成なクラス。共通の枠組みや、処理だけをまとめて用意しておき、具体的な細かな処理は子クラスに実装させたいときに使う。
+interface。インターフェース。クラスが守るべき『操作のルール（仕様）』をまとめたもの。必ず同様の処理、メソッドなどを持つように定義するもの。
+implements。Bクラスが、Aクラスに属しているという宣言。クラスBは、Aとしても扱う。
+今回の問題の骨子。
+A[ ] array = {new C(),null,new D()}。
+CやDが、Aクラスとして扱われない場合は、コンパイルエラーとなるが、今回はＡクラスとして扱うＢクラスの継承をしていっているため、代入可能。Objectクラスは、全てのクラスの親みたいな存在のため、Object objArrayにも代入可能。`
     },
     {
         id: 10,
@@ -1850,7 +1872,7 @@ D. コンパイルも実行もできる
         text: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)",
         code: `1.  public class Main {
 2.      public static void main(String[] args) {
-3.          int[ ][ ] arrayA = {{1, 2}, {1, 2)}, {1, 2, 3}};
+3.          int[ ][ ] arrayA = {{1, 2}, {1, 2}, {1, 2, 3}};
 4.          int[ ][ ] arrayB = arrayA.clone();
 5.          int total = 0;
 6.          for (int[ ] tmp : arrayB) {
@@ -1882,7 +1904,7 @@ D. 実行時に例外がスローされる
             type: "code", 
             value: `1. public class Item {
 2.     private int num = 10;
-3.     public void setNun(int num) {
+3.     public void setNum(int num) {
 4.         this.num = num;
 5.     }
 6.     public int getNum() {
@@ -1973,7 +1995,11 @@ E. 選択肢AとCのどちらも可能である
 F. 選択肢A~Eはすべて誤りである
 `,
         answer: "F",
-        explanation: ``
+        explanation: `Javaの System.out.println(obj); で「NULL」（すべて大文字）と出力させるには、文字列リテラル "NULL" を代入する必要があります。
+A. (null) は小文字の null が出力されます。
+B. (false) は false が出力されます。
+C. (NULL) は予約語/変数エラーでコンパイルエラーになります。
+D. (" ") は半角スペースが出力されます。`
     },
     {
         id: 4,
@@ -1996,7 +2022,7 @@ C. 3行目と4行目で作成したインスタンスが、ガベージコレク
 D. ガベージコレクションの対象となるインスタンスは存在しない
 `,
         answer: "B",
-        explanation: ``
+        explanation: `変数cにて参照が保持される。`
     },
     {
     id: 5,
@@ -2078,7 +2104,7 @@ D. コンパイルエラーが発生する
 E. 実行時に例外がスローされる
 `,
     answer: "D",
-    explanation: ""
+    explanation: "ちなみに、intとintgerは同じように扱える。"
     },
     {
         id: 9,
@@ -2110,7 +2136,7 @@ D. System.out.println(d);
 B. void sample( ) { return "sample"; }
 C. sample() { }
 D. int sample() {return "sample";}
-E void sample() { }
+E. void sample() { }
 `,
         answer: "E",
         explanation: ``
@@ -2125,7 +2151,7 @@ E void sample() { }
             value: `1. public class Sample {
 2.     private String value;
 3.     public void setValue(String value) {
-4.         this.value = value:
+4.         this.value = value;
 5.     }
 6.     public String getValue() {
 7.         return this.value;
@@ -2415,7 +2441,7 @@ F. Mainクラスでコンパイルエラーが発生する
 G. 実行時に例外がスローされる
 `,
     answer: "B",
-    explanation: ""
+    explanation: `クラスの中に{ }だけで囲んで記述することで、インスタンス初期化ブロックを作成できる。実行手順は、インスタンス初期化ブロック　→　コンストラクタの順番`,
 },
 {
         id: 22,
@@ -2444,7 +2470,7 @@ C. 100が表示される
 D. コンパイルエラーが発生する
 `,
         answer: "A",
-        explanation: ""
+        explanation: `インスタンスを生成していないため、static int numにはまだ初期値がはいっていない。`,
     },
 {
     id: 23,
@@ -2509,7 +2535,7 @@ C. super (null, 0);
 D. this.Sample(null, 0);
 `,
         answer: "B",
-        explanation: ""
+        explanation: `コンストラクタが二つあるため、Sample()コンストラクタから、Sample(String str, int num)コンストラクタを呼び出す必要がある。同じクラス内の別のコンストラクタを呼び出すときには、this(...)を使う。`,
     },
 {
         id: 25,
@@ -2540,7 +2566,7 @@ E. コンパイルエラーが発生する
 F. 実行時に例外がスローされる
 `,
         answer: "E",
-        explanation: ""
+        explanation: `thisは、コンストラクタの一番最初に来る必要がある。this("B")の跡に、println("A")を実行することは可能。`,
     },
     {
     id: 26,
@@ -2576,7 +2602,7 @@ D. Childクラスの6行目でコンパイルエラーが発生する
 E. 実行時に例外がスローされる
 `,
     answer: "D",
-    explanation: ""
+    explanation: `子クラスであっても、privateな変数は、別のパッケージからはアクセスできない。`,
 },
 {
     id: 27,
@@ -2611,7 +2637,7 @@ E. 実行時に例外がスローされる
             value: `1. package ex27;
 2. public class Main {
 3.     public static void main(String[] args) {
-4.         StoryBook story new StoryBook();
+4.         StoryBook story = new StoryBook();
 5.         story.setIsbn("xxx-x-xxxxxx-xx-x");
 6.         story.printInfo();
 7.     }
@@ -2625,7 +2651,7 @@ C. コンパイルエラーが発生する
 D. 実行時に例外がスローされる
 `,
     answer: "C",
-    explanation: ""
+    explanation: `protected。別パッケージにある子クラスにもアクセスできる修飾子`
 },
 {
     id: 28,
@@ -2635,8 +2661,8 @@ D. 実行時に例外がスローされる
         { 
             type: "code", 
             value: `1. public class Sample {
-2.     int nun;
-3.     int getNun( ){ return num; }
+2.     int num;
+3.     int getNum( ){ return num; }
 4.     void setNum(int num) { this.num = num; }
 5. }
 ` },
@@ -2712,7 +2738,7 @@ C. コンパイルエラーが発生する
 D. 実行時に例外がスローされる
 `,
     answer: "A",
-    explanation: ""
+    explanation: `privateなどの修飾子がない場合は、パッケージ私的扱いになる。`,
 },
 {
     id: 30,
@@ -2836,13 +2862,13 @@ E. 抽象クラスは、インタフェースに定義されているメソッ�
 6. }
 ` },
         ],
-    options: `A インタフェースAのsampleメソッドをdefaultで修飾しなければいけない
+    options: `A. インタフェースAのsampleメソッドをdefaultで修飾しなければいけない
 B. インタフェースAのsampleメソッドを削除し、Bクラスにsampleメソッドを追加しなければいけない
 C. 実行時に例外がスローされる
 D. 「sample」と表示される
 `,
     answer: "A",
-    explanation: "クラスの継承問題。子クラスで定義されていないものは、親クラスで定義している必要がある。"
+    explanation: "default修飾子をつけることで、子クラスにインターフェースに記述されているメソッドを書かなくても、勝手に実装される。"
 },
 {
     id: 5,
@@ -2871,7 +2897,7 @@ D. 「sample」と表示される
             type: "code", 
             value: `1. public class Main {
 2.     public static void main(String[] args) {
-3.         А а = пеw В();
+3.         A a = new B();
 4.         System.out.println(a);
 5.     }
 6. }
@@ -2884,7 +2910,7 @@ D. Bが表示される
 E. 実行時に例外がスローされる
 `,
     answer: "A",
-    explanation: ""
+    explanation: `toString(), equals(), hashCode() などの Object クラス由来のメソッドを default メソッドにするのは NG $\rightarrow$ コンパイルエラー`,
 },
 {
     id: 6,
@@ -2923,7 +2949,7 @@ Java` },
             type: "code", 
             value: `1. public class Main {
 2.     public static void main(String[] args) {
-3.         А а = пеw C();
+3.         A a = new C();
 4.         a.sample();
 5.     }
 6. }
@@ -2936,7 +2962,7 @@ D. new.sample();
 E. 上記のいずれも誤りである
 `,
     answer: "E",
-    explanation: ""
+    explanation: `インターフェース名.super.メソッド名にて、オーバーライド前のインターフェースを呼び出せる。今回、CはimplementsBのため、Aのインターフェースは呼び出せない。;`
 },
 {
     id: 7,
@@ -3026,7 +3052,7 @@ E. 抽象メソッドは、すべてのサブクラスが実装しなければ�
             type: "code", 
             value: `1. public class Main {
 2.     public static void main(String[] args) {
-3.         AbstractSamples new ConcreteSample();
+3.         AbstractSample s = new ConcreteSample();
 4.         s.sample();
 5.     }
 6. }
@@ -3144,7 +3170,7 @@ F. 実行時に例外がスローされる
             type: "code", 
             value: `1. public class Main {
 2.     public static void main(String[] args) {
-3.         Worker worker new Engineer();
+3.         Worker worker = new Engineer();
 4.         worker.work();
 5.     }
 6. }
@@ -3417,7 +3443,8 @@ D. コンパイルエラーが発生する
 E. 実行時に例外がスローされる
 `,
     answer: "B",
-    explanation: ""
+    explanation: `シャドーイングに関する挙動。
+Parentクラス、Childクラスの両方で、nameを宣言している。Parent側のメソッドで呼び出そうとすると、Parentの変数が返される。`
 },
 {
     id: 20,
@@ -3454,6 +3481,55 @@ E. 実行時に例外がスローされる
 B. 「B」と表示される
 C. 「A」「B」と表示される
 D. 「B」「A」と表示される
+E. コンパイルエラーが発生する
+F. 実行時に例外がスローされる
+`,
+    answer: "C",
+    explanation: ""
+},
+{
+    id: 21,
+    chapter: "ch07",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1. class Parent {
+2.     public Parent( ){
+3.         System.out.println("A");
+4.     }
+5.     public Parent(String val) {
+6.         this();
+7.         System.out.println(val);
+8.     }
+9. }
+`},
+{ 
+            type: "code", 
+            value: `1. class Child extends Parent {
+2.     public Child() {
+3.         super("B");
+4.         System.out.println("C");
+5.     }
+6.     public Child(String val) {
+7.         this();
+8.         System.out.println(val);
+9.     }
+10. }
+`},
+{ 
+            type: "code", 
+            value: `1. public class Main {
+2.     public static void main(String[] args) {
+3.         new Child("D");
+4.     }
+5. }
+`},
+],
+    options: `A. 「A」「B」「C」「D」 と表示される
+B. 「A」「B」と表示される
+C. 「B」「A」「D」「C」と表示される
+D. 「A」「B」「D」「C」と表示される
 E. コンパイルエラーが発生する
 F. 実行時に例外がスローされる
 `,
@@ -3505,7 +3581,8 @@ C. (String)
 D. (String name)
 `,
     answer: "B、D",
-    explanation: ""
+    explanation: `ラムダ式の問題。
+(引数) -> { 処理内容 }。メソッド名を定義しなくても、引数を渡して処理ができる書き方。`,
 },
 {
     id: 2,
@@ -3525,7 +3602,7 @@ D. (String name)
 9. }
 `},
 ],
-    options: `A. Function f = (name) -> 
+    options: `A. Function f = (name) -> {
 　     return "hello," + name;
 　 };
 B. Function f = (name) -> {
@@ -3538,7 +3615,10 @@ E. Function f = name -> {
 　  };
 `,
     answer: "B、C",
-    explanation: ""
+    explanation: `ラムダ式。
+(引数) -> { 処理内容 }。
+また、{ }を省略して記述する場合は、returnも省略できる。
+今回は、変数fに値を返す必要がある`,
 },
 {
     id: 3,
@@ -5056,5 +5136,439 @@ E. import　    package　  class
     answer: "A",
     explanation: ""
 },
+{
+    id: 3,
+    chapter: "ch12",
+    contents:[
+        { type: "text", value: "次のプログラムを確認し、Mainクラスの空欄に入るコードとして、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1. package com.sample;
+2. public class Sample {
+3.     public void sample() {
+4.         // any code
+5.     }
+6. }
+`},
+{ 
+            type: "code", 
+            value: `1. package com.sample.test;
+2. public class Test {
+3.     public void test(int num) {
+4.         // any code
+5.     }
+6. }
+`},
+{ 
+            type: "code", 
+            value: `1. package com;
+2. □□□□□□□
+3. public class Main {
+4.     public static void main(String[] args) {
+5.         new Sample().sample();
+6.         int num = Integer.parseInt(args[0]);
+7.         new Test().test(num);
+8.     }
+9. }
+`},
+    ],
+    options: `A. import java.lang. Integer;
+　 import com.*;
+B. import com.sample.*;
+C. import com.sample.Sample;
+　 import com.sample.test.*;
+D. import java.lang.*;
+`,
+    answer: "C",
+    explanation: ""
+},
+{
+    id: 4,
+    chapter: "ch12",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1. import java.util. function. Supplier;
+2.
+3. public class Sample {
+4.     void sample() {
+5.         int i = 0;
+6.         Supplier<Integer> foo = () -> 1;
+7.         i++;
+8.         System.out.println(foo.get());
+9.     }
+10. }
+`},
+    ],
+    options: `A. コンパイルできるが、何も表示されない
+B. 実行時に例外がスローされる
+C. 0が表示される
+D. 1が表示される
+E. コンパイルエラーが発生する
+`,
+    answer: "E",
+    explanation: ""
+},
+{
+    id: 5,
+    chapter: "ch12",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1. public class Sample {
+2.     static int num = 23;
+3.     public static void main(String[] args) {
+4.         int num = num;
+5.         System.out.println(num);
+6.     }
+7. }
+`},
+    ],
+    options: `A. 23が表示される
+B. 想定外の結果が表示される
+C. コンパイルエラーが発生する
+D. 実行時に例外がスローされる
+`,
+    answer: "C",
+    explanation: ""
+},
+{
+    id: 6,
+    chapter: "ch12",
+    contents:[
+        { type: "text", value: "次の2つのモジュールの設定ファイルに関する説明として、正しいものを選びなさい。(2つ選択)" },
+        { 
+            type: "code", 
+            value: `1. module A {
+2.     requires B;
+3. }
+`},
+{ 
+            type: "code", 
+            value: `1. module B {
+2.     requires A;
+3. }
+`},
+    ],
+    options: `A. どちらのモジュールも、パッケージがエクスポートされない
+B. どちらのモジュールもjava.baseモジュールを必要としない
+C. モジュールの名前が短かすぎる
+D. コンパイルエラーが発生する
+`,
+    answer: "A、D",
+    explanation: ""
+},
+{
+    id: 7,
+    chapter: "ch12",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1.  public class Main {
+2.      public static void main(String[] args) {
+3.          int data = 1;
+4.          switch(data) {
+5.              default:  System.out.print("C");
+6.              case 0:   System.out.print("A");
+7.                        break;
+8.              case 10:  System.out.print("B");
+9.                        break;
+10.         }
+11.     }
+12. }
+`},
+
+    ],
+    options: `A. 「A」と表示される
+B. 「C」と表示される
+C. 「CA」と表示される
+D. 「CAB」と表示される
+E. コンパイルエラーが発生する
+`,
+    answer: "C",
+    explanation: ""
+},
+{
+    id: 8,
+    chapter: "ch12",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1.  public class Sample {
+2.      public static void main(String[] args) {
+3.          String str = "hoge456test";
+4.          int index = 5;
+5.          if (Character. isAlphabetic(str.charAt(index))) {
+6.              index = 0;
+7.          } else if (Character.isDigit(str.charAt(index))) {
+8.              index = 10;
+9.          } else {
+10.             ++index;
+11.         }
+12.         if (str.endsWith("test"))
+13.             str = str.substring(0, index);
+14.         System.out.println(str);
+15.     }
+16. }
+`},
+    ],
+    options: `A. 「hoge」と表示される
+B. 「hoge456」と表示される
+C. 「456test」と表示される
+D. 「hoge456test」と表示される
+E. 「hoge456tes」と表示される
+`,
+    answer: "E",
+    explanation: ""
+},
+{
+    id: 9,
+    chapter: "ch12",
+    contents:[
+        { type: "text", value: "クラスやモジュールの依存関係を調べるために使うコマンドとして、正しいものを選びなさい。(2つ選択)" },
+        
+    ],
+    options: `A. jmod describe
+B. jdeps --list-deps
+C. java Hello.java
+D. jar --show-module-resolution
+E. java --show-module-resolution
+`,
+    answer: "B、E",
+    explanation: ""
+},
+{
+    id: 10,
+    chapter: "ch12",
+    contents:[
+        { type: "text", value: "次のプログラムのコンパイルを成功させるための方法として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1. public interface A {
+2.     abstract void x();
+3. }
+`},
+{ 
+            type: "code", 
+            value: `1. public abstract class B /* position 1 */ {
+2.     /* position 2 */
+3.     public void x( ) { }
+4.     public abstract void z();
+5. }
+`},
+{ 
+            type: "code", 
+            value: `1. public class C extends B implements A {
+2.     /* position 3 */
+3. }
+`},
+    ],
+    options: `A. 以下をposition 3に記述する
+　 @Override
+　 public void x( ) { }
+B. 以下をposition 3に記述する
+　 public void z() {}
+C. 以下をposition 2に記述する
+　 void x( ){ }
+D. 以下をposition 1に記述する
+　 implements A
+`,
+    answer: "B",
+    explanation: ""
+},
+{
+    id: 11,
+    chapter: "ch12",
+    contents:[
+        { type: "text", value: "次のプログラムを確認し、変数valueのデータ型として正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1. public class Main {
+2.     public static void main(String... args) {
+3.         for (var value: args) {
+4.             System.out.println(value);
+5.         }
+6.     }
+7. }
+`},
+    ],
+    options: `A. String
+B. String[]
+C. Character
+D. var
+`,
+    answer: "A",
+    explanation: ""
+},
+{
+    id: 12,
+    chapter: "ch12",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイルし、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1. public class Main {
+2.     public static void main(String[] args) {
+3.         String str = "abcd ef gh";
+4.         int x = str.indexOf("ef");
+5.         str.substring(x + 3);
+6.         x = str.indexOf("ef");
+7.         System.out.println(str + " " + x);
+8.     }
+9. }
+`},
+    ],
+    options: `A. 「ef gh5」と表示される
+B. 「ef gh 4」と表示される
+C. 「abcd ef gh 4」と表示される
+D. 「abcd ef gh 5」と表示される
+E. 実行時に例外がスローされる
+`,
+    answer: "D",
+    explanation: ""
+},
+{
+    id: 13,
+    chapter: "ch12",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1.  public class Sample {
+2.      static String str;
+3.      public static void main(String[] args) {
+4.          switch(str) {
+5.              case "10" : str += "10";
+6.              default : str += "def";
+7.              case "20": str += "20";
+8.          }
+9.          System.out.println(str);
+10.     }
+11. }
+`},
+    ],
+    options: `A. 「10 def 20」と表示される
+B. 「def 20」と表示される
+C. 「null」と表示される
+D. 実行時に例外がスローされる
+`,
+    answer: "D",
+    explanation: ""
+},
+{
+    id: 14,
+    chapter: "ch12",
+    contents:[
+        { type: "text", value: "次のプログラムを確認し、変数xのデータ型として正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1. import java.util.Arrays;
+2. import java.util.List;
+3.
+4. public class Sample {
+5.     public static void main(String[] args) {
+6.         List<String> list Arrays.asList(new String[]{"a", "b", "c"]);
+7.         list. forEach(x-> (System.out.println(x);});
+8.     }
+9. }
+`},
+    ],
+    options: `A. List<Character>
+B. String
+C. char
+D. List<String>
+`,
+    answer: "B",
+    explanation: ""
+},
+{
+    id: 15,
+    chapter: "ch12",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイルし、実行するためのコマンドとして、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1.  package ex15:
+2.
+3.  public class Sample {
+4.      private final String name;
+5.      public Sample(String name) {
+6.          this.name = name;
+7.      }
+8.      public String getName() {
+9.          return name;
+10.     }
+11.     public String toString() {
+12.         return name;
+13.     }
+14. }
+`},
+{ 
+            type: "code", 
+            value: `1.  package ex15;
+2.
+3.  import java.util.logging.Logger;
+4.
+5.  public class Main {
+6.      static final Logger logger = Logger.getAnonymousLogger();
+7.      public static void main(String[] args) {
+8.          var d = new Sample("sample");
+9.          logger.info(d.toString());
+10.     }
+11. }
+`},
+    ],
+    options: `A. javac ex15/Sample.java ex15/Main.java
+　 java -cp build ex15. Main
+B. javac -d build ex15/Sample.java ex15/Main.java
+　 java -cp build ex15. Main
+C. javac -d build ex15/Sample.java ex15/Main.java
+　 java ex15.Main
+D. javac-d build ex15/Sample.java ex15/Main.java
+　 java build.ex15.Main
+`,
+    answer: "B",
+    explanation: ""
+},
+{
+    id: 16,
+    chapter: "ch12",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行した結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1.  import java.time.LocalDate;
+2.  import static java.time.DayOfWeek.*;
+3.
+4.  public class Sample {
+5.      public static void main(String[] args) {
+6.          var today LocalDate.now().with(TUESDAY).getDayOfWeek();
+7.          switch (today) {
+8.          case SUNDAY:
+9.          case SATURDAY:
+10.             System.out.println("weekend");
+11.             break;
+12.         case MONDAY:
+13.              FRIDAY: System.out.println("working");
+14.         default:
+15.             System.out.println("other");
+16.         }
+17.     }
+18. }
+`},
+    ],
+    options: `A. 「working」と表示される
+B. 「working」「other」 と表示される
+C. 「Tuesday」と表示される
+D. 「other」と表示される
+`,
+    answer: "D",
+    explanation: ""
+},
+
 
 ];

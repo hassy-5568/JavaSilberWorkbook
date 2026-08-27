@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (Array.isArray(q.contents)) {
                 bodyAndCodeHtml = q.contents.map(item => {
                     if (item.type === 'text') {
-                        return `<div class="question-body">${escapeHtml(item.value)}</div>`;
+                      return `<div class="question-body">${parseMemoLinks(item.value)}</div>`;
                     } else if (item.type === 'code') {
                         return `<pre class="code-block"><code>${escapeHtml(item.value)}</code></pre>`;
                     }
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 // 2. 従来の「text」と「code」形式への互換処理
                 if (q.text) {
-                    bodyAndCodeHtml += `<div class="question-body">${escapeHtml(q.text)}</div>`;
+                    bodyAndCodeHtml += `<div class="question-body">${parseMemoLinks(q.text)}</div>`;
                 }
                 if (Array.isArray(q.code)) {
                     bodyAndCodeHtml += q.code.map(c => `<pre class="code-block"><code>${escapeHtml(c)}</code></pre>`).join('');
@@ -134,6 +134,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const selectedChapter = item.getAttribute('data-chapter');
             mainHeading.textContent = item.textContent;
 
+            // 章切り替え時に一番上へスクロールする処理を追加
+            window.scrollTo({
+                top: 0,
+                // behavior: 'smooth'
+            });
+
             if (selectedChapter === 'all') {
                 renderQuestions(questionsData);
             } else {
@@ -143,3 +149,104 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// 簡易マークダウン変換（太字, コード記法, 改行をHTMLに変換）
+function parseMarkdown(text) {
+    return text
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/`(.*?)`/g, '<code>$1</code>')
+        .replace(/\n/g, '<br>');
+}
+
+// メソッドメモ画面の描画処理（methods.jsのmethodMemosを参照）
+function renderMethodMemos(container) {
+    container.innerHTML = '';
+
+    const memoWrapper = document.createElement('div');
+    memoWrapper.className = 'method-memo-container';
+
+    methodMemos.forEach(memo => {
+        const item = document.createElement('div');
+        item.className = 'question-card';
+        item.id = memo.id;
+
+        item.innerHTML = `
+            <h3 style="margin-bottom: 10px; color: #0056b3; border-bottom: 2px solid #e0e0e0; padding-bottom: 5px;">
+                ${memo.title}
+            </h3>
+            <div style="line-height: 1.6; color: #333;">
+                ${parseMarkdown(memo.content)}
+            </div>
+        `;
+        memoWrapper.appendChild(item);
+    });
+
+    container.appendChild(memoWrapper);
+}
+
+// 特定のメソッドメモへ切り替えてスクロール移動する関数
+window.goToMethodMemo = function(memoId) {
+    const questionContainer = document.getElementById('questionContainer');
+    const mainHeading = document.getElementById('mainHeading');
+
+    // アクティブ表示の切り替え
+    document.querySelectorAll('.list-item').forEach(i => i.classList.remove('active'));
+    const memoBtn = document.querySelector('[data-chapter="method-memo"]');
+    if (memoBtn) memoBtn.classList.add('active');
+
+    // タイトル変更とメモ描画
+    mainHeading.textContent = 'メソッドメモ';
+    renderMethodMemos(questionContainer);
+
+    // 該当のメモ位置までスクロール ＆ ハイライト
+    setTimeout(() => {
+        const target = document.getElementById(memoId);
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            target.style.transition = 'background-color 0.4s';
+            target.style.backgroundColor = '#e8f4f8';
+            setTimeout(() => {
+                target.style.backgroundColor = '';
+            }, 2000);
+        }
+    }, 50);
+};
+
+// イベントリスナー設定
+document.addEventListener('DOMContentLoaded', () => {
+    const questionContainer = document.getElementById('questionContainer');
+    const mainHeading = document.getElementById('mainHeading');
+
+    document.querySelectorAll('.list-item').forEach(item => {
+        item.addEventListener('click', () => {
+            document.querySelectorAll('.list-item').forEach(i => i.classList.remove('active'));
+            item.classList.add('active');
+
+            const chapter = item.getAttribute('data-chapter');
+            mainHeading.textContent = item.textContent;
+
+            window.scrollTo({ top: 0 });
+
+            if (chapter === 'method-memo') {
+                renderMethodMemos(questionContainer);
+            } else if (chapter === 'all') {
+                renderQuestions(questionsData);
+            } else {
+                const filtered = questionsData.filter(q => q.chapter === chapter);
+                renderQuestions(filtered);
+            }
+        });
+    });
+});
+
+// 独自タグ [memo:メモID:表示テキスト] をリンクボタンに変換する関数
+function parseMemoLinks(str) {
+    if (!str) return '';
+    // まず文字列を安全にエスケープ
+    const escaped = escapeHtml(str);
+    
+    // [memo:memoId:Text] の形式を goToMethodMemo を呼び出す button タグに変換
+    return escaped.replace(/\[memo:([^:]+):([^\]]+)\]/g, (match, memoId, text) => {
+        return `<button type="button" class="memo-link-btn" onclick="goToMethodMemo('${memoId}')">${text}</button>`;
+    });
+}

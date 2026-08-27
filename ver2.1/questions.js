@@ -114,7 +114,7 @@ B. 10が表示される
 C. コンパイルエラーが発生する
 D. 実行時に例外がスローされる`,
         answer: "C",
-        explanation: "同じパッケージに所属しているクラスならば可能。Javaでは、無名パッケージにあるクラスを、名前付きパッケージ（ex4など）からインポートして使用することはできません。そのため、そもそも extends Sample の時点で参照エラーとなります。そのため、コンパイルエラーになる。"
+        explanation: "protectedは、同一クラス＋同一パッケージ＋サブクラスからアクセス可のため、同じパッケージに所属しているクラスならば可能。Javaでは、無名パッケージにあるクラスを、名前付きパッケージ（ex4など）からインポートして使用することはできません。そのため、そもそも extends Sample の時点で参照エラーとなります。そのため、コンパイルエラーになる。"
     },
     {
         id: 5,
@@ -403,7 +403,8 @@ D. String d = String.valueOf('sample');`,
         explanation: `A：new キーワードを使った通常のインスタンス生成。
 B：文字列リテラルによる直接代入（ストリングプールを利用した生成）。
 C：String クラスに newInstance メソッドは存在しません。
-D：'sample' はシングルクォーテーションで囲まれた複数文字のため、文法エラーとなります。`
+D：'sample' はシングルクォーテーションで囲まれた複数文字のため、文法エラーとなります。
+　  String.valueOf()。int型などのものをString型に変換するメソッド。;`
     },
     {
         id: 10,
@@ -473,22 +474,26 @@ G. 実行時に例外がスローされる`,
         explanation: `indexOf() メソッドは、指定した文字列が最初に登場するインデックス番号を返します。
 対象の文字列の中に指定された文字列が存在しない場合、例外はスローされず -1 を返します。`
     },
-    {
-        id: 13,
-        chapter: "ch02",
-        text: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)",
-        code: `1. public class Main {
+{
+    id: 13,
+    chapter: "ch02",
+    contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1. public class Main {
 2.     public static void main(String[] args) {
 3.         String str = "abcde";
 4.         System.out.println(str.substring(2, 4));
 5.     }
-6. }`,
-        options: `A. 「bcd」 と表示される
+6. }`},
+{ type: "text", value: "[memo:substring():substring()]"},
+],
+    options: `A. 「bcd」 と表示される
 B. 「cde」と表示される
 C. 「bc」と表示される
 D. 「cd」と表示される`,
-        answer: "D",
-        explanation: `substring(beginIndex, endIndex) は、beginIndex から endIndex - 1 までの部分文字列を切り出します。
+    explanation: `substring(beginIndex, endIndex) は、beginIndex から endIndex - 1 までの部分文字列を切り出します。
 "abcde" において、インデックス 2 は 'c'、インデックス 4 は 'e' です。
 したがって、インデックス 2 から 3 までの文字（'c' と 'd'）が切り出され、「cd」と表示されます。`
     },
@@ -1191,6 +1196,7 @@ D. 12行目
 ・nullでないか
 6行目の case "10": は文字列リテラルを使っているため、コンパイルエラー。
 8行目は、変数のため、コンパイルエラー。
+ちなみに、finalは、一度値を代入したら、後から変更できない定数を作るための修飾子のため、12行目はコンパイルエラーじゃない。
 `
     },
     {
@@ -1415,7 +1421,7 @@ F. 実行時に例外がスローされる
         text: "次のプログラムを実行し、コンソールに 「10」と表示したい。6行目の空欄に入るコードとして、正しいものを選びなさい。(1つ選択)",
         code: `1.  public class Nain {
 2.      public static void main(String[] args) { 
-3.          int array[][]= new int[][] { {1, 2}, {2, 3, 4}};
+3.          int array[][]= new int[][] { {1, 2}, {2, 3, 4} };
 4.          int total = 0;
 5.          for (int i = 0; i < array.length; i++) {
 6.              for ( □□□□□□□□□ ) {
@@ -3676,7 +3682,7 @@ D. コンパイルエラーが発生する
 E. 実行時に例外がスローされる
 `,
     answer: "D",
-    explanation: ""
+    explanation: `ラムダ式の中で使う変数は、final及び、finalとみなせる変数しか使えない。今回はfor文の中で、cntが再代入されるため、コンパイルエラー。`,
 },
 {
     id: 5,
@@ -3724,7 +3730,8 @@ C. Consumer<Sample> x = s -> list.contains(s);
 D. Function<Sample> x = s -> list.contains(s);
 `,
     answer: "A",
-    explanation: ""
+    explanation: `ラムダ式の4第インターフェースについての問題。
+1. Predicate<T> 述語・判定器。`,
 },
 {
     id: 6,
@@ -3794,12 +3801,13 @@ D. 引数を受け取り、それを使って何らかの処理をし、その�
         
 ],
     options: `A. n = (int) (m * (Math.pow((1 + r), x) - 1) / r);
-B. n = (int) (m * (Math.pow(x, (1 + r)) - 1) / г);
+B. n = (int) (m * (Math.pow(x, (1 + r)) - 1) / r);
 C. n = (int) (m * (Math.sqrt((1 + r)) - 1) / r);
-D. n = (int) (m * (Math.sqrt((1 + r), x) - 1) / г);
+D. n = (int) (m * (Math.sqrt((1 + r), x) - 1) / r);
 `,
-    answer: "B",
-    explanation: ""
+    answer: "A",
+    explanation: `Math.pow(a, b)。aのb乗を計算する。戻り値はdouble型。
+Math.sqrt(a)。aの平方根を計算する。戻り値はdouble型。`
 },
 {
     id: 2,
@@ -5569,6 +5577,5 @@ D. 「other」と表示される
     answer: "D",
     explanation: ""
 },
-
-
 ];
+

@@ -47,6 +47,21 @@ h1 {
     box-sizing: border-box;
 }
 
+/* 左カラム全体の設定 */
+.left-column {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 100px); /* 画面の高さに合わせて上下枠内に収める */
+    position: sticky;
+    top: 20px;
+    width: 250px; /* 必要に応じて幅を調整 */
+}
+
+/* 独立したメソッドメモ用div：潰れないように下に固定配置 */
+.reference-box {
+    flex-shrink: 0;
+}
+
 
 /* 右カラム：問題一覧 */
 .main-content {
@@ -251,4 +266,19 @@ summary:hover {
 
 .hidden {
     display: none !important;
+}
+
+.memo-link-btn {
+    background: none;
+    border: none;
+    color: #636a72;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 1 4px;
+    font-size: inherit;
+    font-family: inherit;
+}
+
+.memo-link-btn:hover {
+    color: #003d80;
 }

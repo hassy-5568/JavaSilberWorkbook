@@ -14,24 +14,24 @@
     <h1>Java Silver 対策問題集</h1>
 
     <div class="container">
-    <!-- 左カラム全体 -->
-    <div class="left-column">
-        <!-- 章リスト用の sidebar -->
-        <div class="sidebar">
-            <h2>章を選択</h2>
-            <ul class="list-group" id="chapterList">
-                <li class="list-item active" data-chapter="all">すべての問題</li>
-            </ul>
-        </div>
+        <!-- 左カラム全体 -->
+        <div class="left-column">
+            <!-- 章リスト用の sidebar -->
+            <div class="sidebar">
+                <h2>章を選択</h2>
+                <ul class="list-group" id="chapterList">
+                    <li class="list-item active" data-chapter="all">すべての問題</li>
+                </ul>
+            </div>
 
-        <!-- 完全独立したメソッドメモ用の div -->
-        <div class="reference-box">
-            <h2>リファレンス</h2>
-            <ul class="list-group">
-                <li class="list-item" data-chapter="method-memo">メソッドメモ</li>
-            </ul>
+            <!-- 完全独立したメソッドメモ用の div -->
+            <div class="reference-box">
+                <h2>リファレンス</h2>
+                <ul class="list-group">
+                    <li class="list-item" data-chapter="method-memo">メソッドメモ</li>
+                </ul>
+            </div>
         </div>
-    </div>
 
         <!-- 右カラム：問題一覧（JSで動的生成） -->
         <div class="main-content">
@@ -40,9 +40,24 @@
         </div>
     </div>
 
-    <!-- JavaScriptファイルの読み込み -->
-    <script src="questions.js"></script>
+    <!-- 2. リファレンスデータ -->
     <script src="methods.js"></script>
+
+    <!-- 3. questions ディレクトリ内の各章ファイルを順番に読み込む -->
+    <script src="questions/ch01.js"></script>
+    <script src="questions/ch02.js"></script>
+    <script src="questions/ch03.js"></script>
+    <script src="questions/ch04.js"></script>
+    <script src="questions/ch05.js"></script>
+    <script src="questions/ch06.js"></script>
+    <script src="questions/ch07.js"></script>
+    <script src="questions/ch08.js"></script>
+    <script src="questions/ch09.js"></script>
+    <script src="questions/ch10.js"></script>
+    <script src="questions/ch11.js"></script>
+    <script src="questions/ch12.js"></script>
+
+    <!-- 4. メイン処理（最後に読み込む） -->
     <script src="app.js"></script>
 </body>
 </html>

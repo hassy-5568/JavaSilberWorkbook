@@ -2339,7 +2339,7 @@ D. 選択肢BとCの両方
 E. 2.5が表示される
 `,
         answer: "A",
-        explanation: ``
+        explanation: `calc()メソッドを、オーバーロードにて複数定義しているため、呼び出すときにはどっちのメソッドが、分かりやすく引数の型を明示する必要がある。`
     },
     {
         id: 18,
@@ -2781,7 +2781,7 @@ C. コンパイルエラーが発生する
 D. 実行時に例外がスローされる
 `,
     answer: "B",
-    explanation: ""
+    explanation: `int numは、privateではなく、パッケージプライベートになっている。同じパッケージからならアクセス可能。`
 },
 // ==========================================
 // 7章 問題データベース
@@ -2837,7 +2837,12 @@ D. インタフェースを継承することはできない
 E. 抽象クラスは、インタフェースに定義されているメソッドを実現しなくてもよい
 `,
         answer: "A、E",
-        explanation: ""
+        explanation: `A. 自動的にpublicになる。
+B. 定数フィールドなら定義可能。
+C. 複数のインターフェースを定義可能
+D. インターフェースは別のインターフェースを定義可能。
+E. 抽象クラスは実装をサブクラスにゆだねることが可能。
+他、単体でインスタンスをもてない、処理の中身をもたない、など。`
     },
     {
     id: 4,
@@ -2916,7 +2921,7 @@ D. Bが表示される
 E. 実行時に例外がスローされる
 `,
     answer: "A",
-    explanation: `toString(), equals(), hashCode() などの Object クラス由来のメソッドを default メソッドにするのは NG $\rightarrow$ コンパイルエラー`,
+    explanation: `toString(), equals(), hashCode() などの Objectクラス由来のメソッドを default メソッドにするのは NG。コンパイルエラーになる。`,
 },
 {
     id: 6,
@@ -2968,7 +2973,7 @@ D. new.sample();
 E. 上記のいずれも誤りである
 `,
     answer: "E",
-    explanation: `インターフェース名.super.メソッド名にて、オーバーライド前のインターフェースを呼び出せる。今回、CはimplementsBのため、Aのインターフェースは呼び出せない。;`
+    explanation: `インターフェース名.super.メソッド名にて、オーバーライド前のインターフェースを呼び出せる。今回、CはimplementsBのため、Aのインターフェースは呼び出せない。B.super.Sample()だったら、継承後のメソッドを使える。;`
 },
 {
     id: 7,
@@ -3149,7 +3154,7 @@ E. Mainクラスでコンパイルエラーが発生する
 F. 実行時に例外がスローされる
 `,
     answer: "B",
-    explanation: ""
+    explanation: `ポリフォーリズムの問題。親クラスに定義しているものと、同じものを子クラスで定義する場合、子クラスは、親クラスの定義が崩壊しないように、親クラスの定義、子クラスの定義、両方もつことになる。そのため、どっちのクラスのメソッドを使うかで、参照先が変わってしまう問題がある。（シャドーイング）。今回、ABABと記載するには、Bクラスでメソッドをオーバーライドしたら可能になる。`
 },
 {
     id: 13,
@@ -3227,9 +3232,9 @@ D. 実行時に例外がスローされる
 3.         Worker a = new Engineer();
 4.         Employee b = new Engineer();
 5.         Engineer c = new Engineer();
-6.         a. create();
+6.         a.create();
 7.         b.work();
-8.         c. report();
+8.         c.report();
 9.     }
 10. }
 `},
@@ -3238,7 +3243,7 @@ D. 実行時に例外がスローされる
 B. Mainクラスの7行目でコンパイルエラーが発生する
 C. Mainクラスの8行目でコンパイルエラーが発生する
 D. 選択肢AとBの両方
-E. 選択肢とCの両方
+E. 選択肢BとCの両方
 `,
     answer: "A",
     explanation: ""
@@ -3273,7 +3278,7 @@ E. 選択肢とCの両方
 4.             new B(),
 5.             new C(),
 6.             new A(),
-7.             пеw D()
+7.             new D()
 8.         };
 9.     }
 10. }
@@ -3289,7 +3294,7 @@ G. 選択肢BとCの両方
 H. 正常に動作する
 `,
     answer: "F",
-    explanation: ""
+    explanation: `Aはインターフェースのため、new でインスタンス化できない。`
 },
 {
     id: 16,
@@ -3328,7 +3333,7 @@ E. B b = (A) a;
 F. B b = (B) a;
 `,
     answer: "F",
-    explanation: ""
+    explanation: `hello()をもっている、Bクラスのインスタンスを作る必要がある。(B)aとかくことで、aの子クラスＢを明示（ダウンキャスト）することで、渡すことができる。`
 },
 {
     id: 17,
@@ -3369,7 +3374,7 @@ C. Mainクラスでコンパイルエラーが発生する
 D. 実行時に例外がスローされる
 `,
     answer: "D",
-    explanation: ""
+    explanation: `new A()で、クラスAのインスタンスを作っているので、Bクラスを代入できない。`
 },
 {
     id: 18,
@@ -3401,7 +3406,7 @@ D. 実行時に例外がスローされる
 6. }
 `},
 ],
-    options: `A. this.num num;
+    options: `A. this.num = num;
 B. this -> num = num;
 C. num = num;
 D. setNum(num);
@@ -3491,7 +3496,7 @@ E. コンパイルエラーが発生する
 F. 実行時に例外がスローされる
 `,
     answer: "C",
-    explanation: ""
+    explanation: `子クラスのコンストラクタの先頭に super() または this() の呼び出しが明示されていない場合、Javaコンパイラによって自動的に親クラスの引数なしコンストラクタを呼ぶ super(); が補完されます。`
 },
 {
     id: 21,
@@ -3600,7 +3605,7 @@ D. (String name)
             value: `1. public class Main {
 2.     public static void main(String[] args) {
 3.         // insert code here
-4.     System.out.println(f.test("Lambda"));
+4.         System.out.println(f.test("Lambda"));
 5.     }
 6.     private static interface Function {
 7.         String test(String name);
@@ -3609,21 +3614,21 @@ D. (String name)
 `},
 ],
     options: `A. Function f = (name) -> {
-　     return "hello," + name;
+　 　　return "hello, " + name;
 　 };
 B. Function f = (name) -> {
-　     "hello, " + name;
+　 　　"hello, " + name;
 　 };
 C. Function f = (name) -> return "hello, " + name;
 D. Function f = (name) -> "hello, " + name;
 E. Function f = name -> {
-　     return "hello, " + name;
+　 　　return "hello, " + name;
 　  };
 `,
     answer: "B、C",
     explanation: `ラムダ式。
 (引数) -> { 処理内容 }。
-また、{ }を省略して記述する場合は、returnも省略できる。
+また、{ }を省略して記述する場合は、returnも省略できる。ラムダ式の処理が1つしかなく、何らかの戻り値を戻す場合は、returnキーワードがあると、逆にコンパイルエラーになる。
 今回は、変数fに値を返す必要がある`,
 },
 {
@@ -3653,7 +3658,7 @@ C. コンパイルエラーが発生する
 D. 実行時に例外がスローされる
 `,
     answer: "C",
-    explanation: ""
+    explanation: `String val = "A";）と同じ名前を、同じスコープ内で定義するラムダ式の引数名（4行目の (val) -> ...）として再使用することはできません。`
 },
 {
     id: 4,
@@ -3665,24 +3670,24 @@ D. 実行時に例外がスローされる
             value: `1.  public class Sample {
 2.      public static void main(String[] args) {
 3.          int cnt = 0;
-4.          Runnable r = () -> {
+4.          Runnable r = ( ) -> {
 5.              for (cnt = 0; cnt < 10; cnt++) {
 6.                  System.out.println(cnt++);
 7.              }
 8.          };
-9.      new Thread(r).start();
+9.          new Thread(r).start();
 10.     }
 11. }
 `},
 ],
-    options: `A. A 0123456789が表示される
+    options: `A. 0123456789が表示される
 B. 02468が表示される
 C. 13579が表示される
 D. コンパイルエラーが発生する
 E. 実行時に例外がスローされる
 `,
     answer: "D",
-    explanation: `ラムダ式の中で使う変数は、final及び、finalとみなせる変数しか使えない。今回はfor文の中で、cntが再代入されるため、コンパイルエラー。`,
+    explanation: `ラムダ式の中で使う変数は、final及び、finalとみなせる変数しか使えない。今回はfor文の中で、cntが再代入されるため、コンパイルエラー。for文の中で定義している場合は可能。`,
 },
 {
     id: 5,
@@ -3901,12 +3906,12 @@ D. 何も表示されない
 `},
 ],
     options: `A. list.sort((a, b) -> a.compareTo(b));
-B. list.sort(() -> a. compareTo(b));
-C. list.sort((a) -> a. compareTo(b));
+B. list.sort(() -> a.compareTo(b));
+C. list.sort((a) -> a.compareTo(b));
 D. list.sort((a, b) -> -a.compareTo(b));
 `,
     answer: "D",
-    explanation: ""
+    explanation: `utli.ListのAPI。二つの引数が必要。-だと降順。+だと昇順になる。`
 },
 {
     id: 4,
@@ -3940,7 +3945,8 @@ D. 3が表示される
 E. コンパイルエラーが発生する
 `,
     answer: "B",
-    explanation: ""
+    explanation: `isAlphabetic()。char型のメソッド。戻り値はboolean。引数の文字がアルファベットかどうかを判定。
+isDigit()。引数が文字かどうか。isLowerCase()。引数が小文字かどうか。`
 },
 {
     id: 5,
@@ -3949,7 +3955,7 @@ E. コンパイルエラーが発生する
         { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
         { 
             type: "code", 
-            value: `1. import java. time. LocalDate;
+            value: `1. import java.time.LocalDate;
 2.
 3. public class Sample {
 4.     public static void main(String[] args) {
@@ -3967,7 +3973,8 @@ D. 6行目でコンパイルエラーが発生する
 E. 実行時に例外がスローされる
 `,
     answer: "E",
-    explanation: ""
+    explanation: `LocalDateの、LocalData.of(year, month, dayOfMonth)の月は、1~12を指定するため、実行時エラー。
+`
 },
 {
     id: 6,
@@ -3976,8 +3983,8 @@ E. 実行時に例外がスローされる
         { type: "text", value: "次のプログラムをコンパイルし、実行したときの結果として、正しいものを選びなさい。なお、現在の日付を2019年8月20日とする。(1つ選択)" },
         { 
             type: "code", 
-            value: `1.  import java. time. DayOfWeek;
-2.  import java. time. LocalDate:
+            value: `1.  import java.time.DayOfWeek;
+2.  import java.time.LocalDate:
 3.
 4.  public class Sample {
 5.      public static void main(String[] args) {
@@ -3996,7 +4003,7 @@ C. 「true, false」と表示される
 D. 「false, true」と表示される
 `,
     answer: "D",
-    explanation: ""
+    explanation: `LocalDataオブジェクトは、不変オブジェクトのため、b.with()で値が変わらない。`
 },
 {
     id: 7,
@@ -4076,7 +4083,7 @@ D. コンパイルエラーが発生する
 E. 実行時に例外がスローされる
 `,
     answer: "E",
-    explanation: ""
+    explanation: `list.add(インデックス,要素)。リストのインデックスに要素を追加する。後ろの要素は全て後ろにずれる。今回は、要素が1しかない時にインデックス2を参照しているため、実行時エラー。`
 },
 {
     id: 10,
@@ -4110,7 +4117,7 @@ F. コンパイルエラーが発生する
 G. 実行時に例外がスローされる
 `,
     answer: "A",
-    explanation: ""
+    explanation: `list.set(インデックス,要素)。インデックスの要素を上書きする。`
 },
 {
     id: 11,
@@ -4166,7 +4173,7 @@ D. コンパイルエラーが発生する
 E. 実行時に例外がスローされる
 `,
     answer: "C",
-    explanation: ""
+    explanation: `list.remove()。実際には、引数で渡されたものを、リストに対して、上からequalsメソッドを使い、同じものだったら排除する仕組み。今回は、equalsをオーバーライドして、nameだけ一致していたら削除している。`
 },
 {
     id: 12,
@@ -4202,7 +4209,7 @@ D. コンパイルエラーが発生する
 E. 実行時に例外がスローされる
 `,
     answer: "C",
-    explanation: ""
+    explanation: `拡張for文のカーソルがどう移動するかの問題。試験的にはCだが、実際には実行時エラーになりそう。`
 },
 {
     id: 13,
@@ -4240,7 +4247,7 @@ D. コンパイルエラーが発生する
 E. 実行時に例外がスローされる
 `,
     answer: "E",
-    explanation: ""
+    explanation: `removeメソッドの後に、呼び出そうとすると実行時エラーになる。`
 },
 {
     id: 14,
@@ -4248,13 +4255,14 @@ E. 実行時に例外がスローされる
     contents:[
         { type: "text", value: "次のうち、値を変更できないか、固定長のリストを作るものを選びなさい。(2つ選択)" },
         ],
-    options: `A. var list = List. of(1,2,3);
+    options: `A. var list = List.of(1, 2, 3);
 B. var list = new ArrayList<Integer>();
-C. var list = Arrays.asList(new Integer() {1,2,3});
+C. var list = Arrays.asList(new Integer[] {1,2,3});
 D. var list = new ArrayList<Integer>(3);
 `,
     answer: "A、C",
-    explanation: ""
+    explanation: `List.of()。完全不変なリストを作る方法。
+asList(new 型[] {})。指定された配列をラップした、固定長リストを作る。配列の要素を変更することは可能だが、配列の長さを変更することはできない。`
 },
 {
     id: 15,
@@ -4281,7 +4289,7 @@ D. 0が表示される
 E. 1が表示される
 `,
     answer: "D",
-    explanation: ""
+    explanation: `mismatchメソッド。引数で渡された配列の要素を、先頭から比較し、一致しない要素のインデックスを返す。`
 },
 {
     id: 16,
@@ -4308,7 +4316,7 @@ D. 0が表示される
 E. -1が表示される
 `,
     answer: "C",
-    explanation: ""
+    explanation: `compare()メソッド。辞書の順番を返すメソッド。`
 },
 {
     id: 17,

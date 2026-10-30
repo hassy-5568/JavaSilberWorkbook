@@ -24,7 +24,8 @@ D. 実行時に例外がスローされる`,
         explanation: `Javaの真偽値型は boolean です（bool ではありません）。
 4行目の bool flg = true; で型名が誤っているため、コンパイルエラーとなります。
 
-なお、do-while文は条件式（while）の判定に関わらず、最初のブロック（do）を必ず1回は実行する特徴があります。`
+なお、do-while文は条件式（while）の判定に関わらず、最初のブロック（do）を必ず1回は実行する特徴があります。
+ちなみに、今回のコードは、booleanに変更したら、7だけ出力される。`
     },
     {
         id: 2,
@@ -146,7 +147,8 @@ D. 実行時に例外がスローされる`,
         answer: "C",
         explanation: `var（ローカル変数型推論）が使用できるのは「ローカル変数」の宣言時のみです。
 フィールド（インスタンス変数・2行目）やメソッド/コンストラクタの引数（3行目）には var を使用できません。そのためコンパイルエラーとなります。
-コンストラクタの使い方を復習する。`
+コンストラクタの使い方を復習する。
+ちなみに、var value を、String valueに変えれば、実行可能。`
     },
     {
         id: 8,
@@ -179,7 +181,8 @@ D. 実行時に例外がスローされる`,
 4.         a = new C();
 5.         a.test();
 6.     }
-7. }`],
+7. }`,],
+
         options: `A. コンパイルエラーが発生する
 B. 実行時例外がスローされる
 C. Aが表示される
@@ -253,26 +256,31 @@ charAt(5) を呼び出すと、存在しない範囲を指定したため実行�
 charAt()は、対象の文字列の該当文字を参照するメソッド。 `
     },
     {
-        id: 12,
-        chapter: "ch02",
-        text: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)",
-        code: `1. public class Main {
+    id: 12,
+    chapter: "ch02",
+    contents: [
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)" },
+        {
+            type: "code",
+            value: `1. public class Main {
 2.     public static void main(String[] args) {
 3.         String str = "abcde";
 4.         System.out.println(str.indexOf("abcdef"));
 5.     }
-6. }`,
-        options: `A. 0が表示される
+6. }`},
+        { type: "text", value: "[memo:indexof:indexOf()]" },
+    ],
+    options: `A. 0が表示される
 B. 1が表示される
 C. 4が表示される
 D. 5が表示される
 E. -1が表示される
 F. コンパイルエラーが発生する
 G. 実行時に例外がスローされる`,
-        answer: "E",
-        explanation: `indexOf() メソッドは、指定した文字列が最初に登場するインデックス番号を返します。
+    answer: "E",
+    explanation: `indexOf() メソッドは、指定した文字列が最初に登場するインデックス番号を返します。
 対象の文字列の中に指定された文字列が存在しない場合、例外はスローされず -1 を返します。`
-    },
+},
 {
     id: 13,
     chapter: "ch02",
@@ -292,6 +300,7 @@ G. 実行時に例外がスローされる`,
 B. 「cde」と表示される
 C. 「bc」と表示される
 D. 「cd」と表示される`,
+answer: "D",
     explanation: `substring(beginIndex, endIndex) は、beginIndex から endIndex - 1 までの部分文字列を切り出します。
 "abcde" において、インデックス 2 は 'c'、インデックス 4 は 'e' です。
 したがって、インデックス 2 から 3 までの文字（'c' と 'd'）が切り出され、「cd」と表示されます。`
@@ -299,13 +308,17 @@ D. 「cd」と表示される`,
     {
         id: 14,
         chapter: "ch02",
-        text: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)",
-        code: `1. public class Main {
+        contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)"},
+        { 
+            type: "code", 
+            value: `1. public class Main {
 2.     public static void main(String[] args) {
 3.         String str = "aaaa";
 4.         System.out.println(str.replace("aa", "b"));
 5.     }
-6. }`,
+6. }`},
+{ type: "text", value: "[memo:replace(obj1,obj2):replace(obj1,obj2)]"},],
         options: `A. 「baa」と表示される
 B. 「aab」と表示される
 C. 「bb」と表示される
@@ -337,14 +350,20 @@ F. 実行時に例外がスローされる`,
     {
         id: 16,
         chapter: "ch02",
-        text: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)",
-        code: `1. public class Main {
+        contents:[
+        { type: "text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)"},
+        { 
+            type: "code", 
+            value: `1. public class Main {
 2.     public static void main(String[] args) {
 3.         String str = "abcde";
 4.         System.out.println(str.substring(1, 3).startsWith("b"));
 5.     }
-6. }`,
-        options: `A. 「true」 と表示される
+6. }`},
+{ type: "text", value: "[memo:starsWith():starsWith()]"},
+
+        ],
+options: `A. 「true」 と表示される
 B. 「false」と表示される
 C. 「bc」と表示される
 D. 「abc」 と表示される
@@ -419,13 +438,15 @@ E. 実行時に例外がスローされる`,
     {
         id: 20,
         chapter: "ch02",
-        text: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)",
-        code: `1. public class Main {
+        contents:[
+                {type:"text", value: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)"},
+                { type: "code", value: `1. public class Main {
 2.     public static void main(String[] args) {
 3.         StringBuilder sb = new StringBuilder("abcde");
 4.         System.out.println(sb.capacity());
 5.     }
-6. }`,
+6. }`},
+{ type: "text", value: "[memo:StringBuilder:StringBuilder]"},],
         options: `A. 0が表示される
 B. 5が表示される
 C. 16が表示される
@@ -454,7 +475,8 @@ B. 「ade」 と表示される
 C. 「aba」と表示される
 D. 「eaba」と表示される`,
         answer: "D",
-        explanation: `1. sb.append("abcde") → "abcde"
+        explanation: `StringBuilderは、Stringと違い、文字列をメソッドで可変可能。下記の順番でメソッドを行う問題。
+1. sb.append("abcde") → "abcde"
 2. sb.reverse() → "edcba" に反転
 3. sb.replace(1, 3, "a") → インデックス 1 から 2（'d' と 'c'）が "a" に置換されるため "eaba" に変化します。`
     },

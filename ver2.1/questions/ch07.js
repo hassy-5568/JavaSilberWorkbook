@@ -38,7 +38,7 @@ C. サブクラスであっても、コンストラクタは引き継がない
 D. アクセス修飾子がprotectedなメソッドには、同じパッケージに属するサブクラスのみアクセスできる
 `,
         answer: "C",
-        explanation: ""
+        explanation: "D.は、別のパッケージでも、サブクラスであれば参照可能。"
     },
     {
         id: 3,
@@ -326,7 +326,7 @@ B. private
 C. public
 D. アクセス修飾子は変えられない`,
     answer: "C",
-    explanation: ""
+    explanation: `オーバーライドするときは、親が設定している範囲以上のアクセス修飾子を設定する必要がある。今回はprotectedかpublic。`
 },
 {
     id: 12,
@@ -408,7 +408,7 @@ C. 「work」と表示される
 D. 実行時に例外がスローされる
 `,
     answer: "C",
-    explanation: ""
+    explanation: `Workerインターフェースを引き継いでいるので、void work()を持つ必要があるが、継承しているEmployeeクラスにて記述あるため、可能。（修飾子はpublic）`
 },
 {
     id: 14,

@@ -110,7 +110,7 @@ D. コンパイルエラーが発生する
 E. 実行時に例外がスローされる
 `,
         answer: "E",
-        explanation: "配列インスタンスのみの生成で、オブジェクトは生成されていない。"
+        explanation: "配列インスタンスのみの生成で、オブジェクトは生成されていない。コンパイルは型しか確認していないため、コンパイルは通る。"
     },
     {
         id: 6,
@@ -211,8 +211,8 @@ CやDが、Aクラスとして扱われない場合は、コンパイルエラ�
     {
         id: 10,
         chapter: "ch05",
-        text: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)",
-        code: `1.  public class Main {
+        contents:[{type:"text",value:"次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)"},
+        {type:"code", value:`1.  public class Main {
 2.      public static void main(String[] args) {
 3.          int[ ][ ] arrayA = {{1, 2}, {1, 2}, {1, 2, 3}};
 4.          int[ ][ ] arrayB = arrayA.clone();
@@ -225,7 +225,9 @@ CやDが、Aクラスとして扱われない場合は、コンパイルエラ�
 11.         System.out.println(total);
 12.     }
 13. }
-`,
+`},
+{ type: "text", value: "[memo:clone():clone()]"},
+        ],
         options: `A. 0が表示される
 B. 12が表示される
 C. コンパイルエラーが発生する

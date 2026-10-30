@@ -181,6 +181,39 @@ F. staticではないメソッドからは、staticなメソッドを呼び出�
         explanation: ``
     },
     {
+    id: 7,
+    chapter: "ch06",
+    contents: [
+        { type: "text", value: "次のクラスのhelloメソッドを呼び出し、コンソールに「hello」と表示したい。" },
+        { 
+            type: "code", 
+            value: `1. public class Sample {
+2.     public void hello() {
+3.         System.out.println("hello");
+4.     }
+5. }
+`},
+        { type: "text", value: "4行目の空欄に入るコードとして、正しいものを選びなさい。(1つ選択)" },
+        { 
+            type: "code", 
+            value: `1. public class Main {
+2.     public static void main(String[] args) {
+3.         Sample sample = new Sample();
+4.         □□□□□□□□□□□□;
+5.     }
+6. }
+` }],
+    options: `A. hello;
+B. hello();
+C. Sample.hello;
+D. Sample.hello();
+E. sample.hello();
+F. sample.hello;
+`,
+    answer: "E",
+    explanation: ""
+    },
+    {
     id: 8,
     chapter: "ch06",
     contents: [
@@ -708,7 +741,7 @@ D. Childクラスの6行目でコンパイルエラーが発生する
 E. 実行時に例外がスローされる
 `,
     answer: "D",
-    explanation: `子クラスであっても、privateな変数は、別のパッケージからはアクセスできない。`,
+    explanation: `子クラスであっても、パッケージ私的な変数は、別のパッケージからはアクセスできない。`,
 },
 {
     id: 27,
@@ -733,7 +766,7 @@ E. 実行時に例外がスローされる
         { 
             type: "code", 
             value: `1. package ex27;
-2. import other.Book:
+2. import other.Book;
 3.
 4. public class StoryBook extends Book {}
 ` 
@@ -757,7 +790,7 @@ C. コンパイルエラーが発生する
 D. 実行時に例外がスローされる
 `,
     answer: "C",
-    explanation: `protected。別パッケージにある子クラスにもアクセスできる修飾子`
+    explanation: `protected。別パッケージにある子クラスにもアクセスできる修飾子。今回、Mainクラスは、Bookクラスの配下ではないため、参照不可。`
 },
 {
     id: 28,

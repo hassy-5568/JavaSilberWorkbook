@@ -186,7 +186,7 @@ D. 実行時に例外がスローされる`,
 7.      }
 8.      public boolean equals(Object obj) {
 9.          if (obj == null) {
-10.         return false;
+10.             return false;
 11.         }
 12.         if (obj instanceof Sample) {
 13.             Sample s = (Sample) obj;
@@ -208,7 +208,8 @@ D. 実行時に例外がスローされる`,
 6.     }
 7. }
 ` 
-        }
+        },
+        { type: "text", value: "[memo:変数 instanceof クラス名:変数 instanceof クラス名]"},
     ],
     options: `A. trueが表示される
 B. falseが表示される
@@ -219,7 +220,8 @@ E. 実行時に例外がスローされる
     answer: "A",
     explanation: `オブジェクト instanceof クラス名（またはインターフェース名）
 そのオブジェクトが特定のクラスのインスタンスかどうかを判定するメソッド。一致しない場合、nullの場合はfalseを返す。
-この問題では、Sampleクラスかどうかの判定をして、実行時エラーを防いでいる。`
+この問題では、Sampleクラスかどうかの判定をして、実行時エラーを防いでいる。
+ちなみに、この問題では、Objectにequalsメソッドがあるため、引数を同じにしないと、objectのequalsメソッドが優先される。`
 },
 {
     id: 10,
@@ -252,7 +254,8 @@ E. 実行時に例外がスローされる
 6.     }
 7. }
 ` 
-        }
+        },
+        { type: "text", value: "[memo:変数 instanceof クラス名:変数 instanceof クラス名]"},
     ],
     options: `A. Sampleクラスでコンパイルエラーが発生する
 B. Mainクラスでコンパイルエラーが発生する
@@ -335,8 +338,10 @@ D. 「true, true」と表示される
     {
         id: 14,
         chapter: "ch03",
-        text: "次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)",
-        code: `1.  public class Main {
+        contents:[
+{type: "text", value:"次のプログラムをコンパイル、実行したときの結果として、正しいものを選びなさい。(1つ選択)"},
+
+{type: "code", value:`1.  public class Main {
 2.      public static void main(String[] args) {
 3.
 4.          String a = "abc";
@@ -355,7 +360,10 @@ D. 「true, true」と表示される
 17.         System.out.println(count);
 18.     }
 19. }
-`,
+`},
+        { type: "text", value: "[memo:intern():intern()]"},
+        ],
+        
         options: `A. 0が表示される
 B. 1が表示される
 C. 2が表示される

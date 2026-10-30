@@ -30,7 +30,7 @@ Math.sqrt(a)。aの平方根を計算する。戻り値はdouble型。`
         { 
             type: "code", 
             value: `1.  public class Sample {
-2.      private int id:
+2.      private int id;
 3.      private String name;
 4.      public Sample(int id, String name) {
 5.          super();
@@ -90,7 +90,7 @@ C. 「C」「B」「A」と表示される
 D. 何も表示されない
 `,
     answer: "C",
-    explanation: ""
+    explanation: `並べ替えの問題。s1>s2の時、1が返ってくる。基本的に、前の番の方が数字が若いため、今回の場合だと降順になる。`
 },
 {
     id: 3,
@@ -119,7 +119,7 @@ C. list.sort((a) -> a.compareTo(b));
 D. list.sort((a, b) -> -a.compareTo(b));
 `,
     answer: "D",
-    explanation: `utli.ListのAPI。二つの引数が必要。-だと降順。+だと昇順になる。`
+    explanation: `utli.ListのAPI。二つの引数が必要。-a.compareTo(b));-だと降順。a.compareTo(b));+だと昇順になる。`
 },
 {
     id: 4,
@@ -145,6 +145,12 @@ D. list.sort((a, b) -> -a.compareTo(b));
 15.     }
 16. }
 `},
+{ type: "text", value: "[memo:Character.isAlphabetic():Character.isAlphabetic()]"},
+{ type: "text", value: "[memo:Character.isDigit():Character.isDigit()]"},
+{ type: "text", value: "[memo:Character.isLowerCase():Character.isLowerCase()]"},
+
+
+
 ],
     options: `A. 0が表示される
 B. 1が表示される
@@ -204,6 +210,10 @@ LocalDate.parse()は、指定した文字列を解析して、日付オブジェ
 11.     }
 12. }
 `},
+{ type: "text", value: "[memo:LocalDate:LocalDate]"},
+{ type: "text", value: "[memo:LocalDate.of(yyyy, mm, dd):LocalDate.of(yyyy, mm, dd)]"},
+{ type: "text", value: "[memo:LocalDate.now():LocalDate.now()]"},
+{ type: "text", value: "[memo:.with(DayOfWeek.曜日):.with(DayOfWeek.曜日)]"},
 ],
     options: `A 「true, true」と表示される
 B. 「false, false」と表示される
@@ -226,7 +236,7 @@ D. スレッドセーフではない
 E. 値を追加する箇所を制御できる
 `,
     answer: "B、D、E",
-    explanation: ""
+    explanation: `ArrayListはスレッドセーフ（同時に別の処理が発生したときに、順番に処理をすること）ではない。`
 },
 {
     id: 8,
@@ -259,7 +269,7 @@ F. 「A10B」と表示される
 G. 実行時に例外がスローされる
 `,
     answer: "F",
-    explanation: ""
+    explanation: `リストは、型を指定しない場合は、Object型を入れる型として、なんでも入れられるようになる。`
 },
 {
     id: 9,
@@ -283,6 +293,7 @@ G. 実行時に例外がスローされる
 13.     }
 14. }
 `},
+{ type: "text", value: "[memo:list.add(番目,引数):list.add(番目,引数)]"},
 ],
     options: `A. 「ABCD」と表示される
 B. 「ACBD」と表示される
@@ -315,6 +326,8 @@ E. 実行時に例外がスローされる
 13.     }
 14. }
 `},
+{ type: "text", value: "[memo:list.set(インデックス,要素):list.set(インデックス,要素)]"},
+
 ],
     options: `A. 「BD」と表示される
 B. 「AD」と表示される
@@ -380,7 +393,7 @@ C. 「B」「C」と表示される
 D. コンパイルエラーが発生する
 E. 実行時に例外がスローされる
 `,
-    answer: "C",
+    answer: "B",
     explanation: `list.remove()。実際には、引数で渡されたものを、リストに対して、上からequalsメソッドを使い、同じものだったら排除する仕組み。今回は、equalsをオーバーライドして、nameだけ一致していたら削除している。`
 },
 {
@@ -417,7 +430,7 @@ D. コンパイルエラーが発生する
 E. 実行時に例外がスローされる
 `,
     answer: "C",
-    explanation: `拡張for文のカーソルがどう移動するかの問題。試験的にはCだが、実際には実行時エラーになりそう。`
+    explanation: `拡張for文のカーソルがどう移動するかの問題。拡張for文の場合、Bを消した後、カーソルは元Bの位置にいるのに、Cがきて処理がスキップされる模様。最後から２つ目の部分だけ、例外的にうまく処理される。基本、拡張for文とremoveの相性は悪い。`
 },
 {
     id: 13,
@@ -455,13 +468,15 @@ D. コンパイルエラーが発生する
 E. 実行時に例外がスローされる
 `,
     answer: "E",
-    explanation: `removeメソッドの後に、呼び出そうとすると実行時エラーになる。`
+    explanation: `removeメソッドの後に、呼び出そうとすると実行時エラーになる。最後から２つ目の部分だけ、例外的にうまく処理される。基本、拡張for文とremoveの相性は悪い。`
 },
 {
     id: 14,
     chapter: "ch09",
     contents:[
         { type: "text", value: "次のうち、値を変更できないか、固定長のリストを作るものを選びなさい。(2つ選択)" },
+{ type: "text", value: "[memo:List.of():List.of()]"},
+{ type: "text", value: "[memo:Arrays.asList(new Integer[] {1,2,3}):Arrays.asList(new Integer[] {1,2,3})]"}
         ],
     options: `A. var list = List.of(1, 2, 3);
 B. var list = new ArrayList<Integer>();
@@ -470,7 +485,7 @@ D. var list = new ArrayList<Integer>(3);
 `,
     answer: "A、C",
     explanation: `List.of()。完全不変なリストを作る方法。
-asList(new 型[] {})。指定された配列をラップした、固定長リストを作る。配列の要素を変更することは可能だが、配列の長さを変更することはできない。`
+asList(new 型[] {})。指定された配列をラップした、固定長リストを作る。配列の要素を変更することは可能だが、配列の長さを変更することはできない。Dの(3)は、初期の内容量を意味するが、別に後から変更可能。`
 },
 {
     id: 15,
@@ -617,7 +632,7 @@ E. list.for(System.out::println);
 5.      public static void main(String[] args) {
 6.          Map<Integer, Item> map = new HashMap<Integer, Item>();
 7.          map.put(1, new Item(1, "A"));
-8.          map.put(2, new Item(2. "B"));
+8.          map.put(2, new Item(2, "B"));
 9.          map.put(3, new Item(3, "C"));
 10.         map.put(1, new Item(1, "A"));
 11.         map.put(null, new Item(0, "default"));

@@ -20,6 +20,7 @@ window.questionsData.push(
 10.     }
 11. }
 `},
+{ type: "text", value: "[memo:try{} catch(例外の型 e){}:try{} catch(例外の型 e){}]"},
 ],
     options: `A. 「finish」と表示される
 B. 「error」と表示される
@@ -61,7 +62,8 @@ E. コンパイルエラーが発生する
 F. 実行時に例外がスローされる
 `,
     answer: "B",
-    explanation: ""
+    explanation: `Javaでは起動パラメータがなくいても、argsはnullにならず、要素数0の空の配列（new String[0]）が渡される。
+finallyブロックは、例外の有無にかかわらず必ず実行される。`
 },
 {
     id: 3,
@@ -100,7 +102,6 @@ F. 実行時に例外がスローされる
 20.
 21. }
 `},
-
 ],
     options: `A. 「A」と表示される
 B. 「B」と表示される
@@ -110,7 +111,8 @@ E. コンパイルエラーが発生する
 F. 実行時に例外がスローされる
 `,
     answer: "E",
-    explanation: ""
+    explanation: `throw new エラーの種類()。メソッドの後に、throws 型を記述して予約する必要がある。
+意図的にエラーを発生させて、catchに誘導する処理。今回は、サブクラスが親の要素をもっているため、親クラスのエラー時にサブクラスの処理も適用されてしまい、catch sub()が到達しないため、コンパイルエラーになる。`
 },
 {
     id: 4,
@@ -141,7 +143,7 @@ D. コンパイルエラーが発生する
 E. 実行時に例外がスローされる
 `,
     answer: "D",
-    explanation: ""
+    explanation: `try -> catch -> finallyの順番に書かないとコンパイルエラー。仮に、この順番で書いた場合は、C　Bが表示される。`
 },
 {
     id: 5,
@@ -175,7 +177,7 @@ E. コンパイルエラーが発生する
 F. 実行時に例外がスローされる
 `,
     answer: "C",
-    explanation: ""
+    explanation: `tryでエラーが発生するため、catchに行き、return "A"は確定。処理を保留している間に、finallyが実行され、catchが実行される。tryが成功していれば、return "C"は実行されるが、今回は実行されない。returnを使う時だけ、処理が保有される。`
 },
 {
     id: 6,
@@ -208,7 +210,8 @@ D. コンパイルエラーが発生する
 E. 実行時に例外がスローされる
 `,
     answer: "B",
-    explanation: ""
+    explanation: `try文で、throw new RuntimeException();で例外を発生。
+その後、catchでreturn10が確定するも、最後に処理されるfinallyのreturnが上書きするため、最終的には20が返される。finallyの中にreturnがない場合は、catch文のreturnが返される。`
 },
 {
     id: 7,
@@ -245,7 +248,8 @@ D. コンパイルエラーが発生する
 E. 実行時に例外がスローされる
 `,
     answer: "B",
-    explanation: ""
+    explanation: `RuntimeExceptionは、ArrayIndexOutOfBoundsExceptionの親クラスのため、catch文が処理される。
+その後、finallyの中にreturnがないため、確定した返り値は更新されず、10がreturnされる。`
 },
 {
     id: 8,
@@ -274,7 +278,7 @@ D. コンパイルエラーが発生する
 E. 実行時に例外がスローされる
 `,
     answer: "D",
-    explanation: ""
+    explanation: `finallyは一つだけ。`
 },
 {
     id: 9,
@@ -312,7 +316,7 @@ F. コンパイルエラーが発生する
 G. 実行時に例外がスローされる
 `,
     answer: "B",
-    explanation: ""
+    explanation: `今回はreturnがないため、普通にtry -> catch -> finallyの順番に処理がされた。`
 },
 {
     id: 10,
@@ -326,7 +330,7 @@ G. 実行時に例外がスローされる
 3.
 4.  public class Sample {
 5.      public static void main(String[] args) {
-6.          try (FileInputStream is new FileInputStream("sample.txt")) {
+6.          try (FileInputStream is = new FileInputStream("sample.txt")) {
 7.              throw new FileNotFoundException();
 8.          } catch (Exception e) {
 9.              System.out.println("A");
@@ -347,7 +351,7 @@ D. 「B」「A」と表示される
 E. コンパイルエラーが発生する
 `,
     answer: "E",
-    explanation: ""
+    explanation: `isは、try文の中で定義しているので、それ以外では使えない。`
 },
 {
     id: 11,
@@ -356,13 +360,10 @@ E. コンパイルエラーが発生する
         { type: "text", value: "次のSampleクラスの2行目の空欄に入るコードとして、正しいものを選びなさい。(2つ選択)" },
         { 
             type: "code", 
-            value: `1. public class SampleException extends Exception { }
-`},
+            value: `1. public class SampleException extends Exception { }`},
 { 
             type: "code", 
-            value: `1. public class TestException extends RuntimeException { }
-
-`},
+            value: `1. public class TestException extends RuntimeException { }`},
 { 
             type: "code", 
             value: `1.  public class Sample {
@@ -386,7 +387,7 @@ D. throws SampleException
 E. 何も記述しなくてもよい
 `,
     answer: "A、D",
-    explanation: ""
+    explanation: `RuntimeExceptionを継承するエラー分は、throwsを書かなくてもよい。`
 },
 {
     id: 12,
@@ -400,7 +401,7 @@ C. エラーはthrows句に宣言する必要はない
 D. エラーは例外処理を記述できない
 `,
     answer: "D",
-    explanation: ""
+    explanation: `Error は、「プログラムではどうにもできない、深刻な問題」を表すクラスです。メモリが足りなくなった、などの実行環境（JVM）の問題がこれにあたります。Throwable の子クラスなので、文法的には try-catch で受け止められます。`
 },
 {
     id: 13,
@@ -453,7 +454,8 @@ C. StringIndexOutOfBoundsException
 D. ListindexOutOfBoundsException
 `,
     answer: "A",
-    explanation: ""
+    explanation: `配列のエラーは、ArrayIndexOutOfBoundsException。
+Listのエラーは、IndexOutOfBoundsException。`
 },
 {
     id: 15,
@@ -504,7 +506,7 @@ C. コンパイルエラーが発生する
 D. 実行時に例外がスローされる
 `,
     answer: "D",
-    explanation: ""
+    explanation: `bをAクラスに入れようとして例外が発生する。`
 },
 {
     id: 16,
@@ -555,5 +557,5 @@ C. IllegalStateExceptionが発生する
 D. Exceptionininitializer Errorが発生する
 `,
     answer: "B",
-    explanation: ""
+    explanation: `mainメソッドの中でmainメソッドをよんでいるので、再帰がおき、オーバーフローになる。`
 });

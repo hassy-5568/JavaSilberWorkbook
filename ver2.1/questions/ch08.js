@@ -39,6 +39,7 @@ window.questionsData.push(
 9.     }
 10. }
 `},
+{ type: "text", value: "[memo:ラムダ式:ラムダ式]"},
 ],
     options: `A. ()
 B. (name)
@@ -47,44 +48,8 @@ D. (String name)
 `,
     answer: "B、D",
     explanation: `ラムダ式の問題。
-(引数) -> { 処理内容 }。メソッド名を定義しなくても、引数を渡して処理ができる書き方。`,
+(引数) -> { 処理内容 }。メソッド名を定義しなくても、引数を渡して処理ができる書き方。また、今回のラムダ式には戻り値がないため、この書き方でＯＫ。`,
 },
-{
-        id: 2,
-        chapter: "ch01",
-        text: "次のうち、パッケージ宣言が正しく記述されているコードを選びなさい。(1つ選択)",
-        code: "",
-        options: [
-            {
-                label: "A",
-                code: `import java.io.*;
-package aaa;
-public class Sample { }`
-            },
-            {
-                label: "B",
-                code: `package aaa;
-import java.io.*;
-public class Sample { }`
-            },
-            {
-                label: "C",
-                code: `import java.io*;
-package aaa {
-  public class Sample { }
-}`
-            },
-            {
-                label: "D",
-                code: `import java.io*;
-package aaa {
-  public class Sample { }
-}`
-            }
-        ],
-        answer: "B",
-        explanation: "パッケージ宣言は必ずソースコードの先頭行に記述する。（コメントは可）"
-    },
 {
     id: 2,
     chapter: "ch08",
@@ -133,7 +98,7 @@ options: [
         ],
     answer: "B、C",
     explanation: `ラムダ式。
-(引数) -> { 処理内容 }。
+(引数) -> { 処理内容 }。今回は、戻り値を設定しないといけないので、{}内にreturnがいる。
 また、{ }を省略して記述する場合は、returnも省略できる。ラムダ式の処理が1つしかなく、何らかの戻り値を戻す場合は、returnキーワードがあると、逆にコンパイルエラーになる。
 今回は、変数fに値を返す必要がある`,
 },
@@ -186,6 +151,7 @@ D. 実行時に例外がスローされる
 10.     }
 11. }
 `},
+{ type: "text", value: "[memo:関数型インターフェース:関数型インターフェース]"},
 ],
     options: `A. 0123456789が表示される
 B. 02468が表示される
@@ -194,7 +160,8 @@ D. コンパイルエラーが発生する
 E. 実行時に例外がスローされる
 `,
     answer: "D",
-    explanation: `ラムダ式の中で使う変数は、final及び、finalとみなせる変数しか使えない。今回はfor文の中で、cntが再代入されるため、コンパイルエラー。for文の中で定義している場合は可能。`,
+    explanation: `Runnavleは、javaが用意している関数型インターフェース。これがあれば、ラムダ式は使える。
+    ラムダ式の中で使う変数は、final及び、finalとみなせる変数しか使えない。一度定義したcntを、ラムダ式の中で、再度変えているため問題。今回はfor文の中で、cntが再代入されるため、コンパイルエラー。for文の中で定義している場合は可能。`,
 },
 {
     id: 5,
